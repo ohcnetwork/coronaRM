@@ -4,7 +4,4 @@ class Contact < ApplicationRecord
   enum risk: [:high, :medium ,:low]
   enum previous_medical: []
   enum symptoms: []
-
-  has_many :secondary_contacts, :class_name => 'Transmission', :foreign_key => 'contact_id'
-  has_many :primary_contacts, :class_name => 'Transmission', :foreign_key => 'primary_contact_id' 
 end
