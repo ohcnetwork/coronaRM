@@ -6,6 +6,7 @@
     <%= simple_form_for @contact, defaults: { input_html: {class: 'form-input mt-1 font-sans'}, wrapper_html: {class: 'flex flex-col my-2'}} do |f|%>
         <%= f.input :name %>
         <%= f.input :patient_id %>
+        <%= f.association :primary_contacts, collection: Contact.all.order(name: :asc),input_html: {class: 'form-select'} %>
         <%= f.input :phone %>
         <%= f.input :age %>
         <%= f.input :sex, input_html: {class: 'form-select'}%>
