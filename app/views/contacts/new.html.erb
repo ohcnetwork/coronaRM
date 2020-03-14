@@ -2,22 +2,23 @@
 
 <!-- <%= render 'form', contact: @contact %> -->
 
-<%= simple_form_for @contact do |f|%>
-    <%= f.input :name %>
-    <%= f.input :patient_id %>
-    <%= f.input :phone %>
-    <%= f.input :age %>
-    <%= f.input :sex %>
-    <%= f.input :house_name %>
-    <%= f.input :ward %>
-    <%= f.input :panchayath %>
-    <%= f.input :landmark %>
-    <%= f.input :district %>
-    <%= f.input :risk %>
-    <%= f.input :previous_medical %>
-    <%= f.input :symptoms %>
+<section>
+    <%= simple_form_for @contact, defaults: { input_html: {class: 'form-input mt-1 font-sans'}, wrapper_html: {class: 'flex flex-col my-2'}} do |f|%>
+        <%= f.input :name %>
+        <%= f.input :patient_id %>
+        <%= f.input :phone %>
+        <%= f.input :age %>
+        <%= f.input :sex %>
+        <%= f.input :house_name %>
+        <%= f.input :ward %>
+        <%= f.input :panchayath %>
+        <%= f.input :landmark %>
+        <%= f.input :district %>
+        <%= f.input :risk %>
+        <%= f.input :previous_medical %>
+        <%= f.input :symptoms %>
 
-    <%= f.button :submit, 'Create New Contact' %>
-<% end %>
-
+        <%= f.button :submit, 'Create New Contact' %>
+    <% end %>
+</section>
 <%= link_to 'Back', contacts_path %>
