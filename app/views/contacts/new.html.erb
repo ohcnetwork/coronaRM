@@ -2,7 +2,7 @@
 
 <!-- <%= render 'form', contact: @contact %> -->
 
-<section>
+<section class="max-w-md mx-auto">
     <%= simple_form_for @contact, defaults: { input_html: {class: 'form-input mt-1 font-sans'}, wrapper_html: {class: 'flex flex-col my-2'}} do |f|%>
         <%= f.input :name %>
         <%= f.input :patient_id %>
@@ -21,4 +21,3 @@
         <%= f.button :submit, 'Create New Contact' %>
     <% end %>
 </section>
-<%= link_to 'Back', contacts_path %>
