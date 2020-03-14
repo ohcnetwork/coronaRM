@@ -5,7 +5,7 @@
 <section class="mt-8 max-w-md">
     <%= simple_form_for @contact, defaults: { input_html: {class: 'form-input mt-1 font-sans'}, wrapper_html: {class: 'flex flex-col my-2'}} do |f|%>
         <%= f.input :name %>
-        <%= f.input :patient_id %>
+        <%= f.input :patient_id, label: "Patient ID" %>
         <%= f.input :phone %>
         <%= f.input :age %>
         <%= f.input :sex, input_html: {class: 'form-select'}%>
