@@ -32,6 +32,8 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'simple_form'
 gem 'enum_help'
 
+# Follow gem for infect gem
+gem 'acts_as_follower', github: 'tcocca/acts_as_follower', branch: 'master'
 
 
 group :development, :test do
