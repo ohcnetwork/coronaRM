@@ -1,0 +1,51 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Contacts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Patient</th>
+      <th>Phone</th>
+      <th>Age</th>
+      <th>Sex</th>
+      <th>House name</th>
+      <th>Ward</th>
+      <th>Panchayath</th>
+      <th>Landmark</th>
+      <th>District</th>
+      <th>Risk</th>
+      <th>Previous medical</th>
+      <th>Symptoms</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @contacts.each do |contact| %>
+      <tr>
+        <td><%= contact.name %></td>
+        <td><%= contact.patient_id %></td>
+        <td><%= contact.phone %></td>
+        <td><%= contact.age %></td>
+        <td><%= contact.sex %></td>
+        <td><%= contact.house_name %></td>
+        <td><%= contact.ward %></td>
+        <td><%= contact.panchayath %></td>
+        <td><%= contact.landmark %></td>
+        <td><%= contact.district %></td>
+        <td><%= contact.risk %></td>
+        <td><%= contact.previous_medical %></td>
+        <td><%= contact.symptoms %></td>
+        <td><%= link_to 'Show', contact %></td>
+        <td><%= link_to 'Edit', edit_contact_path(contact) %></td>
+        <td><%= link_to 'Destroy', contact, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Contact', new_contact_path %>
