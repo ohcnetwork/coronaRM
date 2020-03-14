@@ -5,4 +5,7 @@ class Contact < ApplicationRecord
   enum tracking_type: [:primary, :secondary, :patient]
   enum previous_medical: []
   enum symptoms: []
+
+  # Use Followable to Infect
+  acts_as_followable
 end
