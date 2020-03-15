@@ -8,9 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload', defer: true %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 
-    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
   </head>
 
   <body class="bg-gray-100 leading-normal tracking-normal font-sans text-gray-900">
@@ -33,5 +32,6 @@
       <main class="p-8 py-10 max-w-7xl mx-auto">
         <%= yield %>
       </main>
+      <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
   </body>
 </html>
