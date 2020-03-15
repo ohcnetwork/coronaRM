@@ -44,7 +44,7 @@
                     Infected From
                 </dt>
                 <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-                    <%= @contact.infector.name %>
+                    <%= @contact.infector&.name %>
                 </dd>
             </div>
             <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:px-6 sm:py-5">
@@ -60,7 +60,7 @@
                     Address
                 </dt>
                 <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-                   <%= "#{@contact.house_name}, #{@contact.ward} Ward, #{@contact.panchayath} Panchayath, near #{@contact.landmark}, #{@contact.district.to_s.capitalize}" %> 
+                   <%= "#{@contact.house_name}, #{@contact.panchayath}, #{@contact.landmark}, #{@contact.district.to_s.capitalize}" %> 
                 </dd>
             </div>
             <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:px-6 sm:py-5">

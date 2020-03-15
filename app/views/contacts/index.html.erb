@@ -4,11 +4,11 @@
         <%= link_to '+ New Contact', new_contact_path ,class: 'inline-flex items-center px-3 py-2 border border-gray-300 text-sm leading-4 font-medium rounded-md text-gray-100 bg-gray-900 hover:text-gray-200 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:text-gray-100 active:bg-gray-700 transition ease-in-out duration-150' %>
 </div>
 
-<section class="mt-6">
+<section class="mt-6 h-56">
     <div class="flex flex-col">
         <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
             <div class="align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200">
-                <table class="min-w-full">
+                <table class="min-w-full ">
                     <thead>
                         <tr>
                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-600 uppercase tracking-wider">
@@ -25,9 +25,6 @@
                             </th>
                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-center text-xs leading-4 font-medium text-gray-600 uppercase tracking-wider">
                                 Risk
-                            </th>
-                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-600 uppercase tracking-wider">
-                                House Name
                             </th>
                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-600 uppercase tracking-wider">
                                 Panchayath
@@ -47,25 +44,34 @@
                                 <% end %>
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-right">
-                                <%= contact.phone %>
+                                <%= link_to contact do %>
+                                    <%= contact.phone %>
+                                <% end %>
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-center text-sm leading-5 font-medium">
-                                <%= content_tag :span, contact.tracking_type.to_s.capitalize ,class: "px-2 inline-flex text-xs leading-5 font-semibold rounded-full text-gray-600 #{contact.tracking_type.to_s == "primary" ? 'bg-red-100 text-red-800' : 'bg-gray-100'}" %>
+                                <%= link_to contact do %>
+                                    <%= content_tag :span, contact.tracking_type.to_s.capitalize ,class: "px-2 inline-flex text-xs leading-5 font-semibold rounded-full text-gray-600 #{contact.tracking_type.to_s == "primary" ? 'bg-red-100 text-red-800' : 'bg-gray-200'}" %>
+                                <% end %>
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-600">
-                                <%= contact.sex.to_s.capitalize() %>, <%= contact.age %> y/o
+                                <%= link_to contact do %>
+                                    <%= contact.sex.to_s.capitalize() %>, <%= contact.age %> y/o
+                                <% end %>
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-center text-sm leading-5 font-medium">
-                                <%= content_tag :span, contact.risk.to_s.capitalize ,class: "px-2 inline-flex text-xs leading-5 font-semibold rounded-full text-gray-600 #{contact.risk.to_s == "high" ? 'bg-red-100 text-red-800' : 'bg-gray-100'}" %>
+                                <%= link_to contact do %>
+                                    <%= content_tag :span, contact.risk.to_s.capitalize ,class: "px-2 inline-flex text-xs leading-5 font-semibold rounded-full text-gray-600 #{contact.risk.to_s == "high" ? 'bg-red-100 text-red-800' : 'bg-gray-200'}" %>
+                                <% end %>
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-600">
-                                <%= "#{contact.house_name}" %>
-                            </td>
-                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-600">
-                                <%= contact.panchayath %>
+                                <%= link_to contact do %>
+                                    <%= contact.panchayath %>
+                                <% end %>
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-xs font-medium leading-5 text-gray-600">
-                                <%= contact.district.to_s.upcase %>
+                                <%= link_to contact do %>
+                                    <%= contact.district.to_s.upcase %>
+                                <% end %>
                             </td>
                         </tr>
                         <% end %>
