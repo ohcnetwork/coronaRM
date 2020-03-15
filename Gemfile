@@ -35,6 +35,9 @@ gem 'enum_help'
 # Better css class string
 gem 'css-class-string'
 
+# User Auth
+gem 'devise'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
