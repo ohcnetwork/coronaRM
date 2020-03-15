@@ -1,23 +1,21 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Coronarm</title>
+    <title>Corona RM</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload', defer: true %>
+
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
   </head>
 
   <body class="bg-gray-100 leading-normal tracking-normal font-sans text-gray-900">
-      <header class="px-6 py-4 flex justify-between items-center w-full shadow-md bg-white">
+      <header class="px-8 py-4 flex justify-between items-center w-full shadow-md bg-white">
           <%= link_to root_path do %>
               <h4 class="font-bold">Corona RM</h4>
           <% end %>
-
-          <div>
-              <%= link_to '+ New Contact', new_contact_path ,class: 'text-sm inline-block rounded-md' %>
-          </div>
       </header>
 
       <% if flash.alert %>
@@ -30,7 +28,7 @@
           </div>
       <% end %>
 
-      <main class="px-6 py-10 pt-6">
+      <main class="px-8 py-10">
         <%= yield %>
       </main>
   </body>

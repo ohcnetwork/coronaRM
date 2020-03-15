@@ -1104,6 +1104,11 @@ alphanum-sort@^1.0.0:
   resolved "https://registry.yarnpkg.com/alphanum-sort/-/alphanum-sort-1.0.2.tgz#97a1119649b211ad33691d9f9f486a8ec9fbe0a3"
   integrity sha1-l6ERlkmyEa0zaR2fn0hqjsn74KM=
 
+alpinejs@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/alpinejs/-/alpinejs-2.1.2.tgz#f8862a146aeca42ece305e688addaaaf4f9b35f6"
+  integrity sha512-+fa57l6Ok1sdMQgMBiBBJSuMEH/Kj9XnlLhqA17nMsECTqyVXSYPQAx6juCaX5WdFYXbEF2tDN4xaKOonXNHIQ==
+
 amdefine@>=0.0.4:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
