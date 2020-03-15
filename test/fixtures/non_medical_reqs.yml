@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  contact: one
+  requirement_type: 1
+  other_requirement: MyString
+  fullfilled: false
+
+two:
+  contact: two
+  requirement_type: 1
+  other_requirement: MyString
+  fullfilled: false

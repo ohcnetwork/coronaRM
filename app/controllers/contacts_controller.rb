@@ -18,6 +18,7 @@ class ContactsController < ApplicationController
   # GET /contacts/new
   def new
     @contact = Contact.new
+    @contact.non_medical_reqs.build
   end
 
   # GET /contacts/1/edit
