@@ -1,0 +1,31 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  patient_id: 1
+  phone: MyString
+  age: 1
+  sex: 1
+  house_name: MyString
+  ward: 1
+  panchayath: MyString
+  landmark: MyString
+  district: 1
+  risk: 1
+  previous_medical: 1
+  symptoms: 1
+
+two:
+  name: MyString
+  patient_id: 1
+  phone: MyString
+  age: 1
+  sex: 1
+  house_name: MyString
+  ward: 1
+  panchayath: MyString
+  landmark: MyString
+  district: 1
+  risk: 1
+  previous_medical: 1
+  symptoms: 1

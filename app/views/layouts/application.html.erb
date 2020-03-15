@@ -1,15 +1,37 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Coronarm</title>
+    <title>Corona RM</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload', defer: true %>
+
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
   </head>
 
-  <body>
-    <%= yield %>
+  <body class="bg-gray-100 leading-normal tracking-normal font-sans text-gray-900">
+      <header class="px-16 py-4 flex justify-between items-center w-full shadow-md bg-white">
+          <%= link_to root_path do %>
+              <h4 class="font-bold">Corona RM</h4>
+          <% end %>
+      </header>
+
+      <% if flash.alert %>
+          <div class="bg-red-500 <%= 'hidden' if not flash.alert %>">
+              <div class="container px-2 mx-auto py-2 py-4 text-white text-center"><%= flash[:alert] %></div>
+          </div>
+      <% else %>
+          <div class="bg-green-500 <%= 'hidden' if not flash.notice %>">
+              <div class="container px-2 mx-auto py-4 text-white text-center "><%= flash.notice %></div>
+          </div>
+      <% end %>
+
+      <main class="p-8 py-10 max-w-7xl mx-auto">
+        <%= yield %>
+      </main>
   </body>
 </html>
