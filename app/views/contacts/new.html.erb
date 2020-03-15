@@ -1,0 +1,24 @@
+<h1 class="text-xl">New Contact</h1>
+
+<!-- <%= render 'form', contact: @contact %> -->
+
+<section class="mt-8 max-w-md">
+    <%= simple_form_for @contact, defaults: { input_html: {class: 'form-input mt-1 font-sans'}, wrapper_html: {class: 'flex flex-col my-2'}} do |f|%>
+        <%= f.input :name %>
+        <%= f.input :patient_id, label: "Patient ID" %>
+        <%= f.input :tracking_type, input_html: {class: 'form-select'}%>
+        <%= f.input :phone %>
+        <%= f.input :age %>
+        <%= f.input :sex, input_html: {class: 'form-select'}%>
+        <%= f.input :house_name %>
+        <%= f.input :ward %>
+        <%= f.input :panchayath %>
+        <%= f.input :landmark %>
+        <%= f.input :district, input_html: {class: 'form-select'}%>
+        <%= f.input :risk, input_html: {class: 'form-select'}%>
+        <%= f.input :previous_medical, input_html: {class: 'form-select'}%>
+        <%= f.input :symptoms, input_html: {class: 'form-select'}%>
+
+        <%= f.button :submit, 'Create New Contact', class: 'mt-4 p-2 rounded-md bg-gray-400' %>
+    <% end %>
+</section>

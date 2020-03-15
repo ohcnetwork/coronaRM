@@ -1,0 +1,69 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @contact.name %>
+</p>
+
+<p>
+  <strong>Patient:</strong>
+  <%= @contact.patient_id %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @contact.phone %>
+</p>
+
+<p>
+  <strong>Age:</strong>
+  <%= @contact.age %>
+</p>
+
+<p>
+  <strong>Sex:</strong>
+  <%= @contact.sex %>
+</p>
+
+<p>
+  <strong>House name:</strong>
+  <%= @contact.house_name %>
+</p>
+
+<p>
+  <strong>Ward:</strong>
+  <%= @contact.ward %>
+</p>
+
+<p>
+  <strong>Panchayath:</strong>
+  <%= @contact.panchayath %>
+</p>
+
+<p>
+  <strong>Landmark:</strong>
+  <%= @contact.landmark %>
+</p>
+
+<p>
+  <strong>District:</strong>
+  <%= @contact.district %>
+</p>
+
+<p>
+  <strong>Risk:</strong>
+  <%= @contact.risk %>
+</p>
+
+<p>
+  <strong>Previous medical:</strong>
+  <%= @contact.previous_medical %>
+</p>
+
+<p>
+  <strong>Symptoms:</strong>
+  <%= @contact.symptoms %>
+</p>
+
+<%= link_to 'Edit', edit_contact_path(@contact) %> |
+<%= link_to 'Back', contacts_path %>
