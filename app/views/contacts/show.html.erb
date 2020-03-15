@@ -113,9 +113,9 @@
                     <ul class="">
                         <% @related_contacts.each do |related_contact| %>
                         <li class="pl-3 my-1 pr-4 py-3 flex border border-gray-200 rounded-md items-center justify-between text-sm leading-5">
-                            <%= link_to "#{related_contact.name}, #{related_contact.patient_id} ", related_contact, class: 'ml-2 truncate' %>
+                            <%= link_to related_contact.name, related_contact, class: 'ml-2 truncate' %>
                             <div class="ml-4 flex-shrink-0">
-                                <%= link_to 'Show', contact_path(related_contact), class: 'inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium leading-5 bg-purple-100 text-purple-800' %>
+                                <%= link_to related_contact.patient_id, related_contact, class: 'inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium leading-5 bg-purple-100 text-purple-800' %>
                             </div>
                         </li>
                         <% end %>
