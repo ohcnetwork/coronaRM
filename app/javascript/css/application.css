@@ -1,6 +1,10 @@
-/* purgecss start ignore */
+/*! purgecss start ignore */
+@import "choices.js/public/assets/styles/choices.css";
+/*! purgecss end ignore */
+
+/*! purgecss start ignore */
 @tailwind base;
 @tailwind components;
-/* purgecss end ignore */
+/*! purgecss end ignore */
 
 @tailwind utilities;
