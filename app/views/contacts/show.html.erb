@@ -1,69 +1,100 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @contact.name %>
-</p>
-
-<p>
-  <strong>Patient:</strong>
-  <%= @contact.patient_id %>
-</p>
-
-<p>
-  <strong>Phone:</strong>
-  <%= @contact.phone %>
-</p>
-
-<p>
-  <strong>Age:</strong>
-  <%= @contact.age %>
-</p>
-
-<p>
-  <strong>Sex:</strong>
-  <%= @contact.sex %>
-</p>
-
-<p>
-  <strong>House name:</strong>
-  <%= @contact.house_name %>
-</p>
-
-<p>
-  <strong>Ward:</strong>
-  <%= @contact.ward %>
-</p>
-
-<p>
-  <strong>Panchayath:</strong>
-  <%= @contact.panchayath %>
-</p>
-
-<p>
-  <strong>Landmark:</strong>
-  <%= @contact.landmark %>
-</p>
-
-<p>
-  <strong>District:</strong>
-  <%= @contact.district %>
-</p>
-
-<p>
-  <strong>Risk:</strong>
-  <%= @contact.risk %>
-</p>
-
-<p>
-  <strong>Previous medical:</strong>
-  <%= @contact.previous_medical %>
-</p>
-
-<p>
-  <strong>Symptoms:</strong>
-  <%= @contact.symptoms %>
-</p>
-
-<%= link_to 'Edit', edit_contact_path(@contact) %> |
-<%= link_to 'Back', contacts_path %>
+<div class="bg-white shadow overflow-hidden  sm:rounded-lg">
+    <div class="px-4 py-5 border-b border-gray-200 flex items-center justify-between sm:px-6">
+        <div>
+            <h3 class="text-lg leading-6 font-medium text-gray-900">
+                Contact Information
+            </h3>
+            <p class="mt-1 max-w-2xl text-sm leading-5 text-gray-500">
+                Details of the Contact
+            </p>
+        </div>
+        <%= link_to 'Edit Contact', edit_contact_path(@contact), class: 'inline-block items-center px-3 py-3 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-gray-600 hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-indigo active:bg-gray-700 transition ease-in-out duration-150' %>
+    </div>
+    <div class="px-4 py-5 sm:p-0">
+        <dl>
+            <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 sm:py-5">
+                <dt class="text-sm leading-5 font-medium text-gray-500">
+                    Name
+                </dt>
+                <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
+                    <%= @contact.name %>
+                </dd>
+            </div>
+            <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:px-6 sm:py-5">
+                <dt class="text-sm leading-5 font-medium text-gray-500">
+                    Status
+                </dt>
+                <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
+                    <%= content_tag :span, @contact.tracking_type.to_s.capitalize + ' Suspect' ,class: "px-2 inline-flex text-xs leading-5 font-semibold rounded-full text-gray-600 #{@contact.tracking_type.to_s == "primary" ? 'bg-red-100 text-red-800' : 'bg-gray-200'}" %>
+                    <%= content_tag :span, @contact.risk.to_s.capitalize + ' Risk' ,class: "ml-1 px-2 inline-flex text-xs leading-5 font-semibold rounded-full text-gray-600 #{@contact.risk.to_s == "high" ? 'bg-red-100 text-red-800' : 'bg-gray-200'}" %>
+                </dd>
+            </div>
+            <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:px-6 sm:py-5">
+                <dt class="text-sm leading-5 font-medium text-gray-500">
+                    Age / Sex
+                </dt>
+                <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
+                    <%= @contact.sex.to_s.capitalize() %>, <%= @contact.age %> years old 
+                </dd>
+            </div>
+            <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:px-6 sm:py-5">
+                <dt class="text-sm leading-5 font-medium text-gray-500">
+                    Infected From
+                </dt>
+                <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
+                    <%= @contact.infector.name %>
+                </dd>
+            </div>
+            <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:px-6 sm:py-5">
+                <dt class="text-sm leading-5 font-medium text-gray-500">
+                    Phone Number
+                </dt>
+                <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
+                    <%= @contact.phone %>
+                </dd>
+            </div>
+            <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:px-6 sm:py-5">
+                <dt class="text-sm leading-5 font-medium text-gray-500">
+                    Address
+                </dt>
+                <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
+                   <%= "#{@contact.house_name}, #{@contact.ward} Ward, #{@contact.panchayath} Panchayath, near #{@contact.landmark}, #{@contact.district.to_s.capitalize}" %> 
+                </dd>
+            </div>
+            <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:px-6 sm:py-5">
+                <dt class="text-sm leading-5 font-medium text-gray-500">
+                    About
+                </dt>
+                <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
+                    Fugiat ipsum ipsum deserunt culpa aute sint do nostrud anim incididunt cillum culpa consequat. Excepteur qui ipsum aliquip consequat sint. Sit id mollit nulla mollit nostrud in ea officia proident. Irure nostrud pariatur mollit ad adipisicing reprehenderit deserunt qui eu.
+                </dd>
+            </div>
+            <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:px-6 sm:py-5">
+                <dt class="text-sm leading-5 font-medium text-gray-500">
+                    Related Contacts
+                </dt>
+                <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
+                    <ul class="border border-gray-200 rounded-md">
+                        <li class="pl-3 pr-4 py-3 flex items-center justify-between text-sm leading-5">
+                            <div class="w-0 flex-1 flex items-center">
+                                <svg class="flex-shrink-0 h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z" clip-rule="evenodd" />
+                                </svg>
+                                <span class="ml-2 truncate">
+                                    resume_back_end_developer.pdf
+                                </span>
+                            </div>
+                            <div class="ml-4 flex-shrink-0">
+                                <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500 transition duration-150 ease-in-out">
+                                    Download
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </dd>
+            </div>
+        </dl>
+    </div>
+</div>

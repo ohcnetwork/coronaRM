@@ -5,6 +5,8 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload', defer: true %>
 
@@ -12,7 +14,7 @@
   </head>
 
   <body class="bg-gray-100 leading-normal tracking-normal font-sans text-gray-900">
-      <header class="px-8 py-4 flex justify-between items-center w-full shadow-md bg-white">
+      <header class="px-16 py-4 flex justify-between items-center w-full shadow-md bg-white">
           <%= link_to root_path do %>
               <h4 class="font-bold">Corona RM</h4>
           <% end %>
@@ -28,7 +30,7 @@
           </div>
       <% end %>
 
-      <main class="p-16">
+      <main class="p-8 py-10 max-w-7xl mx-auto">
         <%= yield %>
       </main>
   </body>

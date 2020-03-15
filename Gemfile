@@ -32,6 +32,8 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'simple_form'
 gem 'enum_help'
 
+# Better css class string
+gem 'css-class-string'
 
 
 group :development, :test do
