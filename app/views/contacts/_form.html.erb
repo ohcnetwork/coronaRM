@@ -8,13 +8,15 @@
         <%= f.input :age %>
         <%= f.input :sex, input_html: {class: 'form-select'}%>
     </div>
-    <hr class="pb-4" />
+
     <div class="">
+        <hr class="pb-4" />
         <%= f.input :tracking_type, input_html: {class: 'form-select'}%>
         <%= f.association :infector, collection: Contact.all(),input_html: {class: 'form-select'}%>
     </div>
-    <hr class="pb-4" />
+
     <div>
+        <hr class="pb-4" />
         <%= f.input :phone %>
         <%= f.input :house_name %>
         <%= f.input :ward %>
@@ -22,16 +24,18 @@
         <%= f.input :landmark %>
         <%= f.input :district, input_html: {class: 'form-select'}%>
     </div>
-    <hr class="pb-4" />
+
     <div>
+        <hr class="pb-4" />
+        <h3 class="text-lg mt-4">Medical Risk Assesment</h3>
         <%= f.input :risk, input_html: {class: 'form-select'}%>
         <%= f.input :previous_medical, input_html: {class: 'form-select'}%>
         <%= f.input :symptoms, input_html: {class: 'form-select'}%>
     </div>
 
-    <hr class="pb-4" />
     <div>
-        <h3 class="text-lg">Non Medical Needs</h3>
+        <hr class="pb-4" />
+        <h3 class="text-lg mt-4">Non Medical Needs</h3>
         <%= f.input :need_food, input_html: {class: 'mr-1 form-checkbox p-2'} , wrapper_html: {class: 'mt-2 my-1'}%>
         <%= f.input :need_drinking_water, input_html: {class: 'mr-1 form-checkbox p-2'}, wrapper_html: {class: 'my-1'} %>
         <%= f.input :need_household_water, input_html: {class: 'mr-1 form-checkbox p-2'}, wrapper_html: {class: 'my-1'} %>
