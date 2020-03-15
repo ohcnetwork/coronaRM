@@ -38,11 +38,4 @@ ActiveRecord::Schema.define(version: 2020_03_15_024552) do
     t.index ["patient_id"], name: "index_contacts_on_patient_id", unique: true
   end
 
-  create_table "transmissions", force: :cascade do |t|
-    t.integer "contact_id"
-    t.integer "primary_contact_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
 end
