@@ -4,12 +4,15 @@ module.exports = {
     theme: {
         extend: {
             fontFamily: {
-                sans: ["CircularStd", ...defaultTheme.fontFamily.sans]
+                sans: ["Inter var", ...defaultTheme.fontFamily.sans]
             }
         },
     },
     variants: {},
     plugins: [
         require('@tailwindcss/custom-forms'),
+        require('@tailwindcss/ui')({
+            layout: 'sidebar'
+        }),
     ],
 }

@@ -1,82 +1,36 @@
-<%= form_with(model: contact, local: true) do |form| %>
-  <% if contact.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(contact.errors.count, "error") %> prohibited this contact from being saved:</h2>
-
-      <ul>
-        <% contact.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+<section class="mt-8 max-w-lg">
+    <%= simple_form_for contact, defaults: { input_html: {class: 'form-input mt-1 font-sans'}, wrapper_html: {class: 'flex flex-col my-4'}, label_html: {class: 'mb-1'}} do |f|%>
+    <div class="">
+        <%= f.input :name %>
+        <%= f.input :patient_id, label: "Patient ID"  %>
     </div>
-  <% end %>
+    <div>
+        <%= f.input :age %>
+        <%= f.input :sex, input_html: {class: 'form-select'}%>
+    </div>
+    <hr class="pb-4" />
+    <div class="">
+        <%= f.input :tracking_type, input_html: {class: 'form-select'}%>
+        <%= f.association :infector, collection: Contact.all(),input_html: {class: 'form-select'}%>
+    </div>
+    <hr class="pb-4" />
+    <div>
+        <%= f.input :phone %>
+        <%= f.input :house_name %>
+        <%= f.input :ward %>
+        <%= f.input :panchayath %>
+        <%= f.input :landmark %>
+        <%= f.input :district, input_html: {class: 'form-select'}%>
+    </div>
+    <hr class="pb-4" />
+    <div>
+        <%= f.input :risk, input_html: {class: 'form-select'}%>
+        <%= f.input :previous_medical, input_html: {class: 'form-select'}%>
+        <%= f.input :symptoms, input_html: {class: 'form-select'}%>
+    </div>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :patient_id %>
-    <%= form.number_field :patient_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :phone %>
-    <%= form.text_field :phone %>
-  </div>
-
-  <div class="field">
-    <%= form.label :age %>
-    <%= form.number_field :age %>
-  </div>
-
-  <div class="field">
-    <%= form.label :sex %>
-    <%= form.number_field :sex %>
-  </div>
-
-  <div class="field">
-    <%= form.label :house_name %>
-    <%= form.text_field :house_name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :ward %>
-    <%= form.number_field :ward %>
-  </div>
-
-  <div class="field">
-    <%= form.label :panchayath %>
-    <%= form.text_field :panchayath %>
-  </div>
-
-  <div class="field">
-    <%= form.label :landmark %>
-    <%= form.text_field :landmark %>
-  </div>
-
-  <div class="field">
-    <%= form.label :district %>
-    <%= form.number_field :district %>
-  </div>
-
-  <div class="field">
-    <%= form.label :risk %>
-    <%= form.number_field :risk %>
-  </div>
-
-  <div class="field">
-    <%= form.label :previous_medical %>
-    <%= form.number_field :previous_medical %>
-  </div>
-
-  <div class="field">
-    <%= form.label :symptoms %>
-    <%= form.number_field :symptoms %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+    <span class="inline-flex rounded-md shadow-sm">
+        <%= f.button :submit, 'Submit Changes', class: 'mt-4 inline-flex items-center px-3 py-3 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-gray-600 hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-indigo active:bg-gray-700 transition ease-in-out duration-150' %>
+    </span>
+    <% end %>
+</section>
