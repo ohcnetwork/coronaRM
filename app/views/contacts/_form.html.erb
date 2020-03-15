@@ -44,6 +44,15 @@
         <%= f.input :non_med_other, label: 'Other Non Medical Needs' %>
     </div>
 
+    <div>
+        <hr class="pb-4" />
+        <h3 class="text-lg mt-4">Medical Needs</h3>
+        <%= f.input :need_medicines, input_html: {class: 'mr-1 form-checkbox p-2'} , wrapper_html: {class: 'mt-2 my-1'}%>
+        <%= f.input :ongoing_dialysis, input_html: {class: 'mr-1 form-checkbox p-2'}, wrapper_html: {class: 'my-1'} %>
+        <%= f.input :ongoing_cancer_chemo_radio_therapy, input_html: {class: 'mr-1 form-checkbox p-2'}, wrapper_html: {class: 'my-1'} %>
+        <%= f.input :med_other, label: 'Other Medical Needs' %>
+    </div>
+
     <span class="inline-flex rounded-md shadow-sm">
         <%= f.button :submit, 'Submit Changes', class: 'mt-4 inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-gray-900 hover:bg-gray-800 focus:outline-none focus:border-gray-700 focus:shadow-outline-indigo active:bg-gray-700 transition ease-in-out duration-150' %>
     </span>

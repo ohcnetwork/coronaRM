@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_15_162655) do
+ActiveRecord::Schema.define(version: 2020_03_15_165540) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,10 @@ ActiveRecord::Schema.define(version: 2020_03_15_162655) do
     t.boolean "need_sanitary_napkins"
     t.boolean "need_baby_foods"
     t.string "non_med_other"
+    t.boolean "need_medicines"
+    t.boolean "ongoing_dialysis"
+    t.boolean "ongoing_cancer_chemo_radio_therapy"
+    t.string "med_other"
     t.index ["infector_id"], name: "index_contacts_on_infector_id"
     t.index ["patient_id"], name: "index_contacts_on_patient_id", unique: true
   end
