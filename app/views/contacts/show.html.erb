@@ -36,7 +36,7 @@
                     Age / Sex
                 </dt>
                 <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-                    <%= @contact.sex.to_s.capitalize() %>, <%= @contact.age %> years old 
+                    <%= @contact.sex.to_s.capitalize() %>, <%= @contact.age %> years old
                 </dd>
             </div>
             <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:px-6 sm:py-5">
@@ -60,7 +60,7 @@
                     Address
                 </dt>
                 <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-                   <%= "#{@contact.house_name}, #{@contact.panchayath}, #{@contact.landmark}, #{@contact.district.to_s.capitalize}" %> 
+                    <%= "#{@contact.house_name}, #{@contact.panchayath}, #{@contact.landmark}, #{@contact.district.to_s.capitalize}" %>
                 </dd>
             </div>
             <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:px-6 sm:py-5">
@@ -76,22 +76,15 @@
                     Related Contacts
                 </dt>
                 <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-                    <ul class="border border-gray-200 rounded-md">
-                        <li class="pl-3 pr-4 py-3 flex items-center justify-between text-sm leading-5">
-                            <div class="w-0 flex-1 flex items-center">
-                                <svg class="flex-shrink-0 h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z" clip-rule="evenodd" />
-                                </svg>
-                                <span class="ml-2 truncate">
-                                    resume_back_end_developer.pdf
-                                </span>
-                            </div>
+                    <ul class="">
+                        <% @related_contacts.each do |related_contact| %>
+                        <li class="pl-3 my-1 pr-4 py-3 flex border border-gray-200 rounded-md items-center justify-between text-sm leading-5">
+                            <%= link_to "#{related_contact.name}, #{related_contact.patient_id} ", related_contact, class: 'ml-2 truncate' %>
                             <div class="ml-4 flex-shrink-0">
-                                <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500 transition duration-150 ease-in-out">
-                                    Download
-                                </a>
+                                <%= link_to 'Show', contact_path(related_contact), class: 'font-medium text-indigo-600 hover:text-indigo-500 transition duration-150 ease-in-out' %>
                             </div>
                         </li>
+                        <% end %>
                     </ul>
                 </dd>
             </div>
