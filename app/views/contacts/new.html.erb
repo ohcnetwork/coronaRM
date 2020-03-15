@@ -1,25 +1,39 @@
-<h1 class="text-xl">New Contact</h1>
+<h1 class="text-2xl font-bold">New Contact</h1>
 
 <!-- <%= render 'form', contact: @contact %> -->
-
 <section class="mt-8 max-w-md">
-    <%= simple_form_for @contact, defaults: { input_html: {class: 'form-input mt-1 font-sans'}, wrapper_html: {class: 'flex flex-col my-2'}} do |f|%>
-    <%= f.input :name %>
-    <%= f.input :patient_id, label: "Patient ID" %>
-    <%= f.input :tracking_type, input_html: {class: 'form-select'}%>
-    <%= f.association :infector, collection: Contact.all(), input_html: {class: 'form-select'}%>
-    <%= f.input :phone %>
-    <%= f.input :age %>
-    <%= f.input :sex, input_html: {class: 'form-select'}%>
-    <%= f.input :house_name %>
-    <%= f.input :ward %>
-    <%= f.input :panchayath %>
-    <%= f.input :landmark %>
-    <%= f.input :district, input_html: {class: 'form-select'}%>
-    <%= f.input :risk, input_html: {class: 'form-select'}%>
-    <%= f.input :previous_medical, input_html: {class: 'form-select'}%>
-    <%= f.input :symptoms, input_html: {class: 'form-select'}%>
+    <%= simple_form_for @contact, defaults: { input_html: {class: 'form-input mt-1 font-sans'}, wrapper_html: {class: 'flex flex-col my-4'}, label_html: {class: 'mb-1'}} do |f|%>
+        <div class="">
+            <%= f.input :name %>
+            <%= f.input :patient_id, label: "Patient ID"  %>
+        </div>
+        <div>
+            <%= f.input :age %>
+            <%= f.input :sex, input_html: {class: 'form-select'}%>
+        </div>
+        <hr class="pb-4" />
+        <div class="" >
+            <%= f.input :tracking_type, input_html: {class: 'form-select'}%>
+            <%= f.association :infector, collection: Contact.all(),input_html: {class: 'form-select'}%>
+        </div>
+        <hr class="pb-4" />
+        <div>
+            <%= f.input :phone %>
+            <%= f.input :house_name %>
+            <%= f.input :ward %>
+            <%= f.input :panchayath %>
+            <%= f.input :landmark %>
+            <%= f.input :district, input_html: {class: 'form-select'}%>
+        </div>
+        <hr class="pb-4" />
+        <div>
+            <%= f.input :risk, input_html: {class: 'form-select'}%>
+            <%= f.input :previous_medical, input_html: {class: 'form-select'}%>
+            <%= f.input :symptoms, input_html: {class: 'form-select'}%>
+        </div>
 
-    <%= f.button :submit, 'Create New Contact', class: 'mt-4 p-2 rounded-md bg-gray-400' %>
+        <span class="inline-flex rounded-md shadow-sm">
+                <%= f.button :submit, 'Create New Contact', class: 'mt-4 inline-flex items-center px-3 py-3 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-gray-600 hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-indigo active:bg-gray-700 transition ease-in-out duration-150' %>
+        </span>
     <% end %>
 </section>
