@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_14_104948) do
+ActiveRecord::Schema.define(version: 2020_03_15_024552) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,8 @@ ActiveRecord::Schema.define(version: 2020_03_14_104948) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "tracking_type"
     t.integer "integer"
+    t.bigint "infector_id"
+    t.index ["infector_id"], name: "index_contacts_on_infector_id"
     t.index ["patient_id"], name: "index_contacts_on_patient_id", unique: true
   end
 
