@@ -10,7 +10,7 @@
                 Information regarding the Contact.
             </p>
         </div>
-            <%= link_to 'Edit Contact', edit_contact_path(@contact), class: 'inline-block items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-gray-900 hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-indigo active:bg-gray-700 transition ease-in-out duration-150' %>
+        <%= link_to 'Edit Contact', edit_contact_path(@contact), class: 'inline-block items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-gray-900 hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-indigo active:bg-gray-700 transition ease-in-out duration-150' %>
     </div>
     <div class="px-4 py-5 sm:p-0">
         <dl>
@@ -33,6 +33,14 @@
             </div>
             <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:px-6 sm:py-5">
                 <dt class="text-sm leading-5 font-medium text-gray-500">
+                    Phone Number
+                </dt>
+                <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
+                    <%= @contact.phone %>
+                </dd>
+            </div>
+            <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:px-6 sm:py-5">
+                <dt class="text-sm leading-5 font-medium text-gray-500">
                     Age / Sex
                 </dt>
                 <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
@@ -49,10 +57,19 @@
             </div>
             <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:px-6 sm:py-5">
                 <dt class="text-sm leading-5 font-medium text-gray-500">
-                    Phone Number
+                    Infectees
                 </dt>
                 <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-                    <%= @contact.phone %>
+                    <ul>
+                        <% @contact.infectees.each do |infectee| %>
+                        <li class="pl-3 my-1 pr-4 py-3 flex border border-gray-200 rounded-md items-center justify-between text-sm leading-5">
+                            <%= link_to infectee.name, infectee, class: 'ml-2 truncate' %>
+                            <div class="ml-4 flex-shrink-0">
+                                <%= link_to infectee.patient_id, contact_path(infectee), class: 'inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium leading-5 bg-purple-100 text-purple-800' %>
+                            </div>
+                        </li>
+                        <% end %>
+                    </ul>
                 </dd>
             </div>
             <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:px-6 sm:py-5">
@@ -81,7 +98,7 @@
                         <li class="pl-3 my-1 pr-4 py-3 flex border border-gray-200 rounded-md items-center justify-between text-sm leading-5">
                             <%= link_to "#{related_contact.name}, #{related_contact.patient_id} ", related_contact, class: 'ml-2 truncate' %>
                             <div class="ml-4 flex-shrink-0">
-                                <%= link_to 'Show', contact_path(related_contact), class: 'font-medium text-indigo-600 hover:text-indigo-500 transition duration-150 ease-in-out' %>
+                                <%= link_to 'Show', contact_path(related_contact), class: 'inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium leading-5 bg-purple-100 text-purple-800' %>
                             </div>
                         </li>
                         <% end %>
