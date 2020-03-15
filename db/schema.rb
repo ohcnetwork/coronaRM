@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_15_122154) do
+ActiveRecord::Schema.define(version: 2020_03_15_162655) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,12 @@ ActiveRecord::Schema.define(version: 2020_03_15_122154) do
     t.integer "tracking_type"
     t.integer "integer"
     t.bigint "infector_id"
+    t.boolean "need_food"
+    t.boolean "need_drinking_water"
+    t.boolean "need_household_water"
+    t.boolean "need_sanitary_napkins"
+    t.boolean "need_baby_foods"
+    t.string "non_med_other"
     t.index ["infector_id"], name: "index_contacts_on_infector_id"
     t.index ["patient_id"], name: "index_contacts_on_patient_id", unique: true
   end
