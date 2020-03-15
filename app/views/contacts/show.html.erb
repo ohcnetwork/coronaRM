@@ -49,6 +49,23 @@
             </div>
             <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:px-6 sm:py-5">
                 <dt class="text-sm leading-5 font-medium text-gray-500">
+                    Infectees
+                </dt>
+                <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
+                    <ul>
+                    <% @contact.infectees.each do |infectee| %>
+                        <li class="pl-3 my-1 pr-4 py-3 flex border border-gray-200 rounded-md items-center justify-between text-sm leading-5">
+                            <%= link_to "#{infectee.name}, #{infectee.patient_id} ", related_contact, class: 'ml-2 truncate' %>
+                            <div class="ml-4 flex-shrink-0">
+                                <%= link_to 'Show', contact_path(infectee), class: 'font-medium text-indigo-600 hover:text-indigo-500 transition duration-150 ease-in-out' %>
+                            </div>
+                        </li>
+                    <% end %>
+                    </ul>
+                </dd>
+            </div>
+            <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:px-6 sm:py-5">
+                <dt class="text-sm leading-5 font-medium text-gray-500">
                     Phone Number
                 </dt>
                 <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">

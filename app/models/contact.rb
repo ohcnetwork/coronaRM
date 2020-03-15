@@ -6,6 +6,6 @@ class Contact < ApplicationRecord
   enum previous_medical: []
   enum symptoms: []
 
-  has_many :infectees, class_name: 'Contact', foreign_key: 'infectee_id'
+  has_many :infectees, class_name: 'Contact', foreign_key: 'infector_id'
   belongs_to :infector, class_name: 'Contact', optional: true
 end
