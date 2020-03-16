@@ -6,7 +6,7 @@ class ContactsController < ApplicationController
   # GET /contacts
   # GET /contacts.json
   def index
-    @contacts = Contact.all
+    @contacts = Contact.order(patient_id: :asc)
   end
 
   # GET /contacts/1
@@ -72,6 +72,6 @@ class ContactsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def contact_params
-      params.require(:contact).permit(:name, :patient_id, :phone, :age, :sex, :house_name, :ward, :panchayath, :landmark, :district, :risk, :previous_medical, :symptoms, :tracking_type, :infector_id, :isolation_type)
+      params.require(:contact).permit(:name, :patient_id, :phone, :age, :sex, :house_name, :ward, :panchayath, :landmark, :district, :risk, :previous_medical, :symptoms, :tracking_type, :infector_id, :isolation_type, :need_food, :need_baby_foods, :need_drinking_water, :need_household_water, :need_medicines, :need_sanitary_napkins, :non_med_other, :ongoing_dialysis, :ongoing_cancer_chemo_radio_therapy, :med_other, :is_med_req_met, :is_non_med_req_met, :comment)
     end
 end
