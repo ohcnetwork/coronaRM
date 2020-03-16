@@ -1,20 +1,29 @@
-<h2>Log in</h2>
+<section class="max-w-md">
+    <h2 class="text-xl font-bold">Log in</h2>
 
-<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="form-inputs">
-    <%= f.input :email,
+    <div class="mt-8">
+        <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), defaults: { input_html: {class: 'form-input mt-1'}, wrapper_html: {class: 'flex flex-col my-3'}}) do |f| %>
+        <div class="form-inputs">
+            <%= f.input :email,
                 required: false,
                 autofocus: true,
                 input_html: { autocomplete: "email" } %>
-    <%= f.input :password,
+            <%= f.input :password,
                 required: false,
                 input_html: { autocomplete: "current-password" } %>
-    <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
-  </div>
+            <%= f.input :remember_me, input_html: {class: 'form-checkbox mr-2'}, as: :boolean if devise_mapping.rememberable? %>
+        </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Log in" %>
-  </div>
-<% end %>
+        <div class="form-actions mt-4">
+            <%= f.button :submit, "Log in", class: 'inline-flex items-center px-3 py-2 border border-gray-300 text-sm leading-4 font-medium rounded-md text-gray-100 bg-gray-900 hover:text-gray-200 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:text-gray-100 active:bg-gray-700 transition ease-in-out duration-150' %>
+        </div>
+        <% end %>
 
-<%= render "devise/shared/links" %>
+
+        <hr class="mt-8" />
+        <div class="mt-4 flex justify-between items-baseline w-full">
+            <%= render "devise/shared/links" %>
+        </div>
+
+    </div>
+</section>

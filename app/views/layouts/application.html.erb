@@ -17,6 +17,11 @@
           <%= link_to root_path do %>
               <h4 class="font-bold">Corona RM</h4>
           <% end %>
+          <% if user_signed_in? %>
+              <%= link_to 'Log out', destroy_user_session_path, method: :delete, class: 'ml-2 text-md inline-block rounded-md' %>
+          <% else %>
+              <%= link_to 'Log in', new_user_session_path ,class: 'ml-2 text-md inline-block rounded-md' %>
+          <% end %>
       </header>
 
       <% if flash.alert %>
