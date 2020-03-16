@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_15_172415) do
+ActiveRecord::Schema.define(version: 2020_03_16_022532) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 2020_03_15_172415) do
     t.boolean "is_non_med_req_met"
     t.boolean "is_med_req_met"
     t.text "comment"
+    t.string "isolation_type"
     t.index ["infector_id"], name: "index_contacts_on_infector_id"
     t.index ["patient_id"], name: "index_contacts_on_patient_id", unique: true
   end
