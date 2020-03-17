@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_17_054344) do
+ActiveRecord::Schema.define(version: 2020_03_17_060709) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,6 +70,14 @@ ActiveRecord::Schema.define(version: 2020_03_17_054344) do
     t.index ["contact_id"], name: "index_non_medical_reqs_on_contact_id"
   end
 
+  create_table "previous_medical_conditions", force: :cascade do |t|
+    t.bigint "contact_id", null: false
+    t.string "condition_type"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["contact_id"], name: "index_previous_medical_conditions_on_contact_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -85,4 +93,5 @@ ActiveRecord::Schema.define(version: 2020_03_17_054344) do
 
   add_foreign_key "medical_reqs", "contacts"
   add_foreign_key "non_medical_reqs", "contacts"
+  add_foreign_key "previous_medical_conditions", "contacts"
 end
