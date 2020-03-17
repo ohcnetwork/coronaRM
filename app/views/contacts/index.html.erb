@@ -21,13 +21,13 @@
                                 Type
                             </th>
                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-600 uppercase tracking-wider">
-                                Sex / Age
+                                Gender / Age
                             </th>
                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-center text-xs leading-4 font-medium text-gray-600 uppercase tracking-wider">
                                 Risk
                             </th>
                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-600 uppercase tracking-wider">
-                                Panchayath
+                                Since Contact
                             </th>
                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-600 uppercase tracking-wider">
                                 District
@@ -39,7 +39,7 @@
                         <tr class="bg-white">
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 font-medium text-gray-900">
                                 <%= link_to contact do %>
-                                    <div class="text-sm leading-5 text-gray-900"><%= contact.name %></div>
+                                    <div class="text-sm leading-5 text-gray-900"><%= contact.name.titleize %></div>
                                     <div class="text-sm leading-5 text-gray-600"><%= contact.patient_id %></div>
                                 <% end %>
                             </td>
@@ -55,7 +55,7 @@
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-600">
                                 <%= link_to contact do %>
-                                    <%= contact.sex.to_s.capitalize() %>, <%= contact.age %> y/o
+                                    <%= contact.gender.to_s.capitalize() %>, <%= contact.age %> y/o
                                 <% end %>
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-center text-sm leading-5 font-medium">
@@ -65,7 +65,11 @@
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-600">
                                 <%= link_to contact do %>
-                                    <%= contact.panchayath.downcase.capitalize() %>
+                                    <% if contact.date_of_first_contact %>
+                                        <%= time_ago_in_words(contact.date_of_first_contact) %>
+                                    <% else %>
+                                        Unknown
+                                    <% end %>
                                 <% end %>
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-xs font-medium leading-5 text-gray-600">
