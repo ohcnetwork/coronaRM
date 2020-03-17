@@ -10,4 +10,7 @@ class User < ApplicationRecord
   def set_default_role
     self.role ||= :phone_caller
   end
+
+  has_many :calls
+  has_many :called, through: :calls, source: :contact
 end
