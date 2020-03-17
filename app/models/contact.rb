@@ -9,4 +9,6 @@ class Contact < ApplicationRecord
 
   has_many :infectees, class_name: 'Contact', foreign_key: 'infector_id'
   belongs_to :infector, class_name: 'Contact', optional: true
+
+  has_many :non_medical_reqs
 end
