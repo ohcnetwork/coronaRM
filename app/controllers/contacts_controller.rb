@@ -14,6 +14,7 @@ class ContactsController < ApplicationController
   # GET /contacts/1.json
   def show
     @related_contacts = Contact.where(phone: @contact.phone).where.not(patient_id: @contact.patient_id)
+    @last_call = @contact.calls.order("created_at").last
   end
 
   # GET /contacts/new
