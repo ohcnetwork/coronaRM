@@ -10,7 +10,7 @@
                 Information regarding the Contact.
             </p>
         </div>
-        <%= link_to 'Update Contact', edit_contact_path(@contact), class: 'inline-block items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-gray-900 hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-indigo active:bg-gray-700 transition ease-in-out duration-150' %>
+        <%= link_to 'Edit Contact', edit_contact_path(@contact), class: 'inline-block items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-gray-900 hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-indigo active:bg-gray-700 transition ease-in-out duration-150' %>
     </div>
     <div class="px-4 py-5 sm:p-0">
         <dl>
@@ -99,7 +99,7 @@
                     <%= @contact.non_med_other %>
                     <div class="mt-4">
                         <hr />
-                        <h4 class="mt-4 text-gray-600">Add new Non Medical Requirements</h4>
+                        <h4 class="mt-4 text-gray-600">Add Medical Requirements</h4>
                         <%= render 'medical_reqs/form' %>
                     </div>
                 </dd>
@@ -134,6 +134,14 @@
                         <h4 class="mt-4 text-gray-600">Add new Non Medical Requirements</h4>
                         <%= render 'non_medical_reqs/form' %>
                     </div>
+                </dd>
+            </div>
+            <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:px-6 sm:py-5">
+                <dt class="text-sm leading-5 font-medium text-gray-500">
+                    Feedback
+                </dt>
+                <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
+                    <%= @contact.symptoms %>
                 </dd>
             </div>
             <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:px-6 sm:py-5">
