@@ -36,7 +36,7 @@ class Ability
     if user.present?
       can :manage, :all
 
-      user.can :edit, Contact if user.admin_district?
+      user.can :edit, Contact if user.admin?
     end
   end
 end
