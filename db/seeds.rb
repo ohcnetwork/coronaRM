@@ -34,7 +34,7 @@ def populate_from_data_file
                      phc_name: row[10],
                      house_name: row[11],
                      town: row[12],
-                     district: row[13].downcase.strip,
+                     district_id: District.find_by(name: row[13].titleize.strip).id,
                      phone: row[14],
                      date_of_first_contact: valid_date_or_empty_string(row[16] ? row[16] : ""),
                      mode_of_contact: row[19],
@@ -42,5 +42,6 @@ def populate_from_data_file
                    })
 end
 
-  # populate_from_data_file()
 end
+
+populate_from_data_file()
