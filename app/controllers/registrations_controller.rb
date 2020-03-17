@@ -5,12 +5,16 @@ class RegistrationsController < Devise::RegistrationsController
   private
   def redirect_unless_admin
     unless current_user.try(:admin?)
-      flash[:error] = "Only Admin Access"
+      flash[:notice] = "Only Admin Access"
       redirect_to root_path
     end
   end
 
   def sign_up(resource_name, resource)
-    true
+    false
+  end
+
+  def sign_up_params
+    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, district: [:name])
   end
 end
