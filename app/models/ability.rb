@@ -30,5 +30,7 @@ class Ability
     #
     # See the wiki for details:
     # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
+    can :read, :all
+    user.can :create, Contact if user.admin_district?
   end
 end
