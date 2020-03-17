@@ -14,4 +14,7 @@ class Contact < ApplicationRecord
   has_many :medical_reqs
   has_many :previous_medical_conditions
   has_many :symptoms
+
+  has_many :calls
+  has_many :callees, through: :calls
 end
