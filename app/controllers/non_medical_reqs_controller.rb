@@ -13,6 +13,18 @@ class NonMedicalReqsController < ApplicationController
     end
   end
 
+  def fullfill
+    @non_medical_req = NonMedicalReq.find(params[:id])
+    @contact = Contact.find(params[:contact_id])
+    @non_medical_req.fullfilled = true
+
+    if @non_medical_req.save
+      redirect_to @contact
+    else
+      flash.now[:danger] = 'There was an error saving the Non Medical Requirement, Contact Your Admin'
+    end
+  end
+
   private
 
   def non_medical_req_params

@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :contacts, except: [:destroy] do
-    resources :non_medical_reqs
+    resources :non_medical_reqs do
+      get :fullfill, on: :member
+    end
   end
 end
