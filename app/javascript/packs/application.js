@@ -29,12 +29,10 @@ document.addEventListener("turbolinks:load", () => {
 
         element.addEventListener("click", () => {
             Turbolinks.scroll['top'] = document.scrollingElement.scrollTop;
-            console.log(Turbolinks.scroll['top'])
         });
 
         element.addEventListener("submit", () => {
             Turbolinks.scroll['top'] = document.scrollingElement.scrollTop;
-            console.log(Turbolinks.scroll['top'])
         });
 
     });
