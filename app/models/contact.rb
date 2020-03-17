@@ -13,4 +13,5 @@ class Contact < ApplicationRecord
   has_many :non_medical_reqs
   has_many :medical_reqs
   has_many :previous_medical_conditions
+  has_many :symptoms
 end

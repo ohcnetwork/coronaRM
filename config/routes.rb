@@ -13,5 +13,7 @@ Rails.application.routes.draw do
     end
     resources :previous_medical_conditions do
     end
+    resources :symptoms do
+    end
   end
 end
