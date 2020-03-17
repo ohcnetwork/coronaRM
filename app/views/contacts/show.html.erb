@@ -54,14 +54,16 @@
                 </dt>
                 <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
                     <% if @contact.infector %>
-                        <li class="pl-3 my-1 pr-4 py-3 flex border border-gray-200 rounded-md items-center justify-between text-sm leading-5">
-                            <%= link_to @contact.infector.name, @contact.infector, class: 'ml-2 truncate' %>
-                            <div class="ml-4 flex-shrink-0">
-                                <%= link_to @contact.infector.patient_id, @contact.infector, class: 'inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium leading-5 bg-purple-100 text-purple-800' %>
-                            </div>
-                        </li>
+                    <li class="pl-3 my-1 pr-4 py-3 flex border border-gray-200 rounded-md items-center justify-between text-sm leading-5">
+                        <%= link_to @contact.infector.name, @contact.infector, class: 'ml-2 truncate' %>
+                        <div class="ml-4 flex-shrink-0">
+                            <%= link_to @contact.infector.patient_id, @contact.infector, class: 'inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium leading-5 bg-purple-100 text-purple-800' %>
+                        </div>
+                    </li>
                     <% else %>
+                    <p>
                         Unknown Source
+                    </p>
                     <% end %>
                 </dd>
             </div>
