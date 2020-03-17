@@ -11,4 +11,5 @@ class Contact < ApplicationRecord
   belongs_to :infector, class_name: 'Contact', optional: true
 
   has_many :non_medical_reqs
+  has_many :medical_reqs
 end

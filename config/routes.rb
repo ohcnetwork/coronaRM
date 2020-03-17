@@ -8,5 +8,8 @@ Rails.application.routes.draw do
     resources :non_medical_reqs do
       get :fullfill, on: :member
     end
+    resources :medical_reqs do
+      get :fullfill, on: :member
+    end
   end
 end
