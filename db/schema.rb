@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_17_180525) do
+ActiveRecord::Schema.define(version: 2020_03_17_182736) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,6 +60,8 @@ ActiveRecord::Schema.define(version: 2020_03_17_180525) do
     t.string "phc_name"
     t.date "date_of_first_contact"
     t.string "mode_of_contact"
+    t.bigint "district_id"
+    t.index ["district_id"], name: "index_contacts_on_district_id"
     t.index ["infector_id"], name: "index_contacts_on_infector_id"
     t.index ["patient_id"], name: "index_contacts_on_patient_id", unique: true
   end
@@ -121,6 +123,7 @@ ActiveRecord::Schema.define(version: 2020_03_17_180525) do
 
   add_foreign_key "calls", "contacts"
   add_foreign_key "calls", "users"
+  add_foreign_key "contacts", "districts"
   add_foreign_key "medical_reqs", "contacts"
   add_foreign_key "non_medical_reqs", "contacts"
   add_foreign_key "previous_medical_conditions", "contacts"
