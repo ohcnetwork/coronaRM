@@ -1,4 +1,6 @@
 class ContactsController < ApplicationController
+  load_and_authorize_resource
+
   before_action :set_contact, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
 
@@ -12,6 +14,7 @@ class ContactsController < ApplicationController
   # GET /contacts/1.json
   def show
     @related_contacts = Contact.where(phone: @contact.phone).where.not(patient_id: @contact.patient_id)
+    @last_call = @contact.calls.order("created_at").last
   end
 
   # GET /contacts/new
@@ -59,6 +62,15 @@ class ContactsController < ApplicationController
     @contact.destroy
     respond_to do |format|
       format.html { redirect_to contacts_url, notice: 'Contact was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
+  def make_call
+    called_user = User.find(params[:user_id])
+    @contact.callees << called_user
+    respond_to do |format|
+      format.html { redirect_to contacts_path, notice: "Contact #{@contact.name} was successfully Called" }
       format.json { head :no_content }
     end
   end

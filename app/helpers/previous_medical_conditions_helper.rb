@@ -1,0 +1,2 @@
+module PreviousMedicalConditionsHelper
+end

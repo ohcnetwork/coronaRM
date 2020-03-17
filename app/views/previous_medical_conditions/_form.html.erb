@@ -1,0 +1,8 @@
+<%= simple_form_for [@contact, @contact.previous_medical_conditions.build], defaults: { input_html: {class: 'form-input mt-1'}, wrapper_html: {class: 'flex flex-col my-2 max-w-md'}}, data: { 'turbolinks-scroll': false } do |f| %>
+    <div class="flex items-center w-16">
+        <%= f.input :condition_type, label: 'Condition Type', input_html: {class: 'form-select'} %>
+        <div class="mt-4 pl-2">
+            <%= f.button :submit, 'Save', 'data-turbolinks-scroll': false, class:'inline-flex items-center px-3 py-3 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150' %>
+        </div>
+    </div>
+<% end %>

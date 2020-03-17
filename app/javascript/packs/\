@@ -25,23 +25,21 @@ Turbolinks.scroll = {};
 document.addEventListener("turbolinks:load", () => {
 
     const elements = document.querySelectorAll("[data-turbolinks-scroll]");
+
     elements.forEach(function(element) {
 
         element.addEventListener("click", () => {
             Turbolinks.scroll['top'] = document.scrollingElement.scrollTop;
-            console.log(Turbolinks.scroll['top'])
         });
 
         element.addEventListener("submit", () => {
             Turbolinks.scroll['top'] = document.scrollingElement.scrollTop;
-            console.log(Turbolinks.scroll['top'])
         });
 
     });
 
     if (Turbolinks.scroll['top']) {
         document.scrollingElement.scrollTo(0, Turbolinks.scroll['top']);
-        console.log(Turbolinks.scroll['top'])
     }
 
     Turbolinks.scroll = {};

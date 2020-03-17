@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <div class="bg-white shadow overflow-hidden  sm:rounded-lg">
     <div class="px-4 py-5 border-b border-gray-200 flex items-center justify-between sm:px-6">
         <div>
@@ -10,7 +8,10 @@
                 Information regarding the Contact.
             </p>
         </div>
-        <%= link_to 'Update Contact', edit_contact_path(@contact), class: 'inline-block items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-gray-900 hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-indigo active:bg-gray-700 transition ease-in-out duration-150' %>
+        <div>
+            <%= link_to 'Edit Contact', edit_contact_path(@contact), class: 'inline-block items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-gray-900 hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-indigo active:bg-gray-700 transition ease-in-out duration-150' %>
+        <%= link_to 'Mark as Called', make_call_contact_path(@contact, user_id: @current_user.id), class: 'inline-block items-center ml-2 px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-indigo active:bg-red-700 transition ease-in-out duration-150' %>
+        </div>
     </div>
     <div class="px-4 py-5 sm:p-0">
         <dl>
@@ -42,27 +43,22 @@
             </div>
             <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:px-6 sm:py-5">
                 <dt class="text-sm leading-5 font-medium text-gray-500">
-                    Age / Sex
+                    Last Called
                 </dt>
                 <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-                    <%= @contact.sex.to_s.capitalize() %>, <%= @contact.age %> years old
+                    <% if @last_call %>
+                        Called <span class="font-bold"><%= time_ago_in_words(@last_call.created_at) %></span> ago, by <%= @last_call.user.email %>
+                    <% else %>
+                        Not called yet
+                    <% end %>
                 </dd>
             </div>
             <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:px-6 sm:py-5">
                 <dt class="text-sm leading-5 font-medium text-gray-500">
-                    Infected From
+                    Age / Sex
                 </dt>
                 <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-                    <% if @contact.infector %>
-                        <li class="pl-3 my-1 pr-4 py-3 flex border border-gray-200 rounded-md items-center justify-between text-sm leading-5">
-                            <%= link_to @contact.infector.name, @contact.infector, class: 'ml-2 truncate' %>
-                            <div class="ml-4 flex-shrink-0">
-                                <%= link_to @contact.infector.patient_id, @contact.infector, class: 'inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium leading-5 bg-purple-100 text-purple-800' %>
-                            </div>
-                        </li>
-                    <% else %>
-                        Unknown Source
-                    <% end %>
+                    <%= @contact.sex.to_s.capitalize() %>, <%= @contact.age %> years old
                 </dd>
             </div>
             <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:px-6 sm:py-5">
@@ -78,7 +74,27 @@
                     Previous Medical Conditions
                 </dt>
                 <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-                    <%= @contact.previous_medical %>
+                    <ul>
+                        <% @contact.previous_medical_conditions.each do |previous_medical_condition| %>
+                        <li class="mt-2	block p-2 flex items-center justify-between border rounded">
+                            <p>
+                                Has <%= previous_medical_condition.condition_type.to_s.titleize %>
+                            </p>
+                            <div>
+                                <span class="text-xs">
+                                    Information given
+                                    <%= time_ago_in_words(previous_medical_condition.created_at) %> ago
+                                </span>
+                            </div>
+                        </li>
+                        <% end %>
+                    </ul>
+                    <%= @contact.non_med_other %>
+                    <div class="mt-4">
+                        <hr />
+                        <h4 class="mt-4 text-gray-600">Add Previous Medical Conditions</h4>
+                        <%= render 'previous_medical_conditions/form' %>
+                    </div>
                 </dd>
             </div>
             <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:px-6 sm:py-5">
@@ -86,7 +102,27 @@
                     Symptoms
                 </dt>
                 <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-                    <%= @contact.symptoms %>
+                    <ul>
+                        <% @contact.symptoms.each do |symptom| %>
+                        <li class="mt-2	block p-2 flex items-center justify-between border rounded">
+                            <p>
+                                Has <%= symptom.symptom_type.to_s.titleize %>
+                            </p>
+                            <div>
+                                <span class="text-xs">
+                                    Information given
+                                    <%= time_ago_in_words(symptom.created_at) %> ago
+                                </span>
+                            </div>
+                        </li>
+                        <% end %>
+                    </ul>
+                    <%= @contact.non_med_other %>
+                    <div class="mt-4">
+                        <hr />
+                        <h4 class="mt-4 text-gray-600">Add Previous Medical Conditions</h4>
+                        <%= render 'symptoms/form' %>
+                    </div>
                 </dd>
             </div>
             <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:px-6 sm:py-5">
@@ -94,7 +130,31 @@
                     Medical Requirements
                 </dt>
                 <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-                    <%= @contact.med_other %>
+                    <ul>
+                        <% @contact.medical_reqs.each do |medical_req| %>
+                        <% if not medical_req.fullfilled? %>
+                        <li class="mt-2	block p-2 flex items-center justify-between border rounded">
+                            <p>
+                                Needs <%= medical_req.requirement_type.to_s.titleize %>
+                            </p>
+                            <div>
+                                <span class="text-xs">
+                                    Requested
+                                    <%= time_ago_in_words(medical_req.created_at) %> ago
+                                </span>
+                                <%= link_to 'Complete', fullfill_contact_medical_req_path(id: medical_req.id, contact_id: @contact.id) ,class: 'inline-flex ml-2 items-center px-2 py-1 border border-transparent text-xs leading-4 font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-50 focus:outline-none focus:border-indigo-300 focus:shadow-outline-indigo active:bg-indigo-200 transition ease-in-out duration-150' %>
+                                <%= link_to 'Cancel',contact_medical_req_path(id: medical_req.id, contact_id: @contact.id) ,method: :delete,class: 'inline-flex ml-2 items-center px-2 py-1 border border-transparent text-xs leading-4 font-medium rounded-md text-red-700 bg-red-100 hover:bg-indigo-50 focus:outline-none focus:border-indigo-300 focus:shadow-outline-indigo active:bg-indigo-200 transition ease-in-out duration-150' %>
+                            </div>
+                        </li>
+                        <% end %>
+                        <% end %>
+                    </ul>
+                    <%= @contact.non_med_other %>
+                    <div class="mt-4">
+                        <hr />
+                        <h4 class="mt-4 text-gray-600">Add Medical Requirements</h4>
+                        <%= render 'medical_reqs/form' %>
+                    </div>
                 </dd>
             </div>
             <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:px-6 sm:py-5">
@@ -102,7 +162,71 @@
                     Non Medical Requirements
                 </dt>
                 <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
+                    <ul>
+                        <% @contact.non_medical_reqs.each do |non_medical_req| %>
+                        <% if not non_medical_req.fullfilled? %>
+                        <li class="mt-2	block p-2 flex items-center justify-between border rounded">
+                            <p>
+                                Needs <%= non_medical_req.requirement_type.to_s.titleize %>
+                            </p>
+                            <div>
+                                <span class="text-xs">
+                                    Requested
+                                    <%= time_ago_in_words(non_medical_req.created_at) %> ago
+                                </span>
+                                <%= link_to 'Complete', fullfill_contact_non_medical_req_path(id: non_medical_req.id, contact_id: @contact.id) ,class: 'inline-flex ml-2 items-center px-2 py-1 border border-transparent text-xs leading-4 font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-50 focus:outline-none focus:border-indigo-300 focus:shadow-outline-indigo active:bg-indigo-200 transition ease-in-out duration-150' %>
+                                <%= link_to 'Cancel',contact_non_medical_req_path(id: non_medical_req.id, contact_id: @contact.id) ,method: :delete,class: 'inline-flex ml-2 items-center px-2 py-1 border border-transparent text-xs leading-4 font-medium rounded-md text-red-700 bg-red-100 hover:bg-indigo-50 focus:outline-none focus:border-indigo-300 focus:shadow-outline-indigo active:bg-indigo-200 transition ease-in-out duration-150' %>
+                            </div>
+                        </li>
+                        <% end %>
+                        <% end %>
+                    </ul>
                     <%= @contact.non_med_other %>
+                    <div class="mt-4">
+                        <hr />
+                        <h4 class="mt-4 text-gray-600">Add new Non Medical Requirements</h4>
+                        <%= render 'non_medical_reqs/form' %>
+                    </div>
+                </dd>
+            </div>
+            <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:px-6 sm:py-5">
+                <dt class="text-sm leading-5 font-medium text-gray-500">
+                    Feedback
+                </dt>
+                <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
+                    <%= simple_form_for @contact, defaults: { input_html: {class: 'form-input mt-1 font-sans'}, wrapper_html: {class: 'flex flex-col my-4'}, label_html: {class: 'mb-1'}} do |f|%>
+                    <%= f.input :med_other, label: 'Other Medical Needs' %>
+                    <%= f.input :non_med_other, label: 'Other Non Medical Needs' %>
+                    <div class="mt-4">
+                        <hr class="pb-2" />
+
+                        <%= f.input :is_non_med_req_met, label: 'Are Non-Medical needs met ?', input_html: {class: 'mr-1 form-checkbox p-2'} , wrapper_html: {class: 'mt-2 my-1'}%>
+                        <%= f.input :is_med_req_met, label: 'Are Medical needs met ? ', input_html: {class: 'mr-1 form-checkbox p-2'}, wrapper_html: {class: 'my-1'} %>
+                    </div>
+                    <div class="pt-8">
+                        <%= f.input :comment, label: 'Feedback Comments if Any' %>
+                        <%= f.button :submit, 'Save', class: 'inline-flex items-center px-3 py-3 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150' %>
+                    </div>
+                    <% end %>
+                </dd>
+            </div>
+            <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:px-6 sm:py-5">
+                <dt class="text-sm leading-5 font-medium text-gray-500">
+                    Infected From
+                </dt>
+                <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
+                    <% if @contact.infector %>
+                    <li class="pl-3 my-1 pr-4 py-3 flex border border-gray-200 rounded-md items-center justify-between text-sm leading-5">
+                        <%= link_to @contact.infector.name, @contact.infector, class: 'ml-2 truncate' %>
+                        <div class="ml-4 flex-shrink-0">
+                            <%= link_to @contact.infector.patient_id, @contact.infector, class: 'inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium leading-5 bg-purple-100 text-purple-800' %>
+                        </div>
+                    </li>
+                    <% else %>
+                    <p>
+                        Unknown Source
+                    </p>
+                    <% end %>
                 </dd>
             </div>
             <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:px-6 sm:py-5">
