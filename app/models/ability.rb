@@ -34,7 +34,7 @@ class Ability
     user ||= User.new # guest user (not logged in)
 
     if user.present?
-      can :read, :all
+      can :manage, :all
 
       user.can :edit, Contact if user.admin_district?
     end
