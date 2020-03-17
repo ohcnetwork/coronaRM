@@ -1,0 +1,2 @@
+module NonMedicalReqsHelper
+end

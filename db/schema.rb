@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_17_022433) do
+ActiveRecord::Schema.define(version: 2020_03_17_063926) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,7 +28,6 @@ ActiveRecord::Schema.define(version: 2020_03_17_022433) do
     t.string "district"
     t.string "risk"
     t.string "previous_medical"
-    t.string "symptoms"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "tracking_type"
@@ -52,6 +51,40 @@ ActiveRecord::Schema.define(version: 2020_03_17_022433) do
     t.index ["patient_id"], name: "index_contacts_on_patient_id", unique: true
   end
 
+  create_table "medical_reqs", force: :cascade do |t|
+    t.bigint "contact_id", null: false
+    t.string "requirement_type"
+    t.boolean "fullfilled"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["contact_id"], name: "index_medical_reqs_on_contact_id"
+  end
+
+  create_table "non_medical_reqs", force: :cascade do |t|
+    t.bigint "contact_id", null: false
+    t.string "requirement_type"
+    t.boolean "fullfilled"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["contact_id"], name: "index_non_medical_reqs_on_contact_id"
+  end
+
+  create_table "previous_medical_conditions", force: :cascade do |t|
+    t.bigint "contact_id", null: false
+    t.string "condition_type"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["contact_id"], name: "index_previous_medical_conditions_on_contact_id"
+  end
+
+  create_table "symptoms", force: :cascade do |t|
+    t.bigint "contact_id", null: false
+    t.string "symptom_type"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["contact_id"], name: "index_symptoms_on_contact_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -65,4 +98,8 @@ ActiveRecord::Schema.define(version: 2020_03_17_022433) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "medical_reqs", "contacts"
+  add_foreign_key "non_medical_reqs", "contacts"
+  add_foreign_key "previous_medical_conditions", "contacts"
+  add_foreign_key "symptoms", "contacts"
 end
