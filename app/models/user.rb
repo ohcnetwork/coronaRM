@@ -13,4 +13,6 @@ class User < ApplicationRecord
 
   has_many :calls
   has_many :called, through: :calls, source: :contact
+
+  belongs_to :district
 end
