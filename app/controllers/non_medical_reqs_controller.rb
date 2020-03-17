@@ -25,6 +25,17 @@ class NonMedicalReqsController < ApplicationController
     end
   end
 
+  def destroy
+    @non_medical_req = NonMedicalReq.find(params[:id])
+    @contact = Contact.find(params[:contact_id])
+
+    @non_medical_req.destroy
+    respond_to do |format|
+      format.html { redirect_to @contact, notice: 'Request was succesfully cancelled' }
+      format.json { head :no_content }
+    end
+  end
+
   private
 
   def non_medical_req_params
