@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_17_104452) do
+ActiveRecord::Schema.define(version: 2020_03_17_104757) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 2020_03_17_104452) do
     t.string "isolation_type"
     t.string "town"
     t.string "phc_name"
+    t.date "date_of_first_contact"
     t.index ["infector_id"], name: "index_contacts_on_infector_id"
     t.index ["patient_id"], name: "index_contacts_on_patient_id", unique: true
   end
