@@ -65,6 +65,15 @@ class ContactsController < ApplicationController
     end
   end
 
+  def make_call
+    called_user = User.find(params[:user_id])
+    @contact.callees << called_user
+    respond_to do |format|
+      format.html { redirect_to contacts_path, notice: "Contact #{@contact.name} was successfully Called" }
+      format.json { head :no_content }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_contact

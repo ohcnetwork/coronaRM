@@ -10,7 +10,10 @@
                 Information regarding the Contact.
             </p>
         </div>
-        <%= link_to 'Edit Contact', edit_contact_path(@contact), class: 'inline-block items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-gray-900 hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-indigo active:bg-gray-700 transition ease-in-out duration-150' %>
+        <div>
+        <%= link_to 'Mark as Called', make_call_contact_path(@contact, user_id: @current_user.id), class: 'inline-block items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-indigo active:bg-red-700 transition ease-in-out duration-150' %>
+            <%= link_to 'Edit Contact', edit_contact_path(@contact), class: 'inline-block items-center ml-2 px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-gray-900 hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-indigo active:bg-gray-700 transition ease-in-out duration-150' %>
+        </div>
     </div>
     <div class="px-4 py-5 sm:p-0">
         <dl>

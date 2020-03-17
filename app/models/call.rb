@@ -1,4 +1,4 @@
 class Call < ApplicationRecord
-  belongs_to :contacts
-  belongs_to :users
+  belongs_to :contact
+  belongs_to :user
 end

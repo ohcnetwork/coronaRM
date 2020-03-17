@@ -16,5 +16,5 @@ class Contact < ApplicationRecord
   has_many :symptoms
 
   has_many :calls
-  has_many :callees, through: :calls
+  has_many :callees, through: :calls, source: :user
 end

@@ -12,5 +12,5 @@ class User < ApplicationRecord
   end
 
   has_many :calls
-  has_many :called, through: :calls
+  has_many :called, through: :calls, source: :contact
 end
