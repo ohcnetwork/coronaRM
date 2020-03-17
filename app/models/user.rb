@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  enum role: [:phone_caller, :admin, :medical_officer, :officer, :state_official]
+  enum role: {phone_caller: "phone_caller", admin: "admin", medical_officer: "medical_officer", officer: "officer", state_official: "state_official"}
   after_initialize :set_default_role, :if => :new_record?
 
   def set_default_role
