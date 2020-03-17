@@ -2,19 +2,19 @@ class RegistrationsController < Devise::RegistrationsController
   before_action :authenticate_user!, :redirect_unless_admin, only: [:new, :create]
   skip_before_action :require_no_authentication
 
+  def create
+    super do
+      resource.district = @current_user.district
+      resource.save
+    end
+  end
+
   private
   def redirect_unless_admin
     unless current_user.try(:admin?)
-      flash[:notice] = "Only Admin Access"
+      flash[:alert] = "Access Denied! Only Admins are Allowed Access"
       redirect_to root_path
     end
   end
 
-  def sign_up(resource_name, resource)
-    false
-  end
-
-  def sign_up_params
-    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, district: [:name])
-  end
 end
