@@ -23,9 +23,11 @@
                     <p>
                         <%= @contact.name %>
                     </p>
-                    <p class="text-sm font-bold">
-                        <%= @contact.patient_id %>
-                    </p>
+                    <div>
+                        <p class="inline-block items-center px-2.5 py-0.5 rounded-md text-sm font-medium leading-5 bg-blue-100 text-blue-800">
+                            <%= @contact.patient_id %>
+                        </p>
+                    </div>
                 </dd>
             </div>
             <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:px-6 sm:py-5">
