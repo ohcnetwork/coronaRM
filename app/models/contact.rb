@@ -16,4 +16,20 @@ class Contact < ApplicationRecord
   has_many :callees, through: :calls, source: :user
 
   belongs_to :district
+
+  def self.to_csv
+    attributes = %w{id email name}
+
+    CSV.generate(headers: true) do |csv|
+      # csv << attributes
+      csv << column_names
+
+
+      all.each do |user|
+        # csv << attributes.map{ |attr| user.send(attr) }
+        csv << result.attributes.values_at(*column_names)
+      end
+    end
+  end
+
 end

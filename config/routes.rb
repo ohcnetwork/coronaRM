@@ -4,7 +4,12 @@ Rails.application.routes.draw do
   root to: 'contacts#index'
   devise_for :users, :controllers => { :registrations => 'registrations'}
 
-  resources :dashboard, only: [:index]
+  resources :dashboard, only: [:index] do
+    collection do
+      get 'generate_csv_report'
+    end
+  end
+
   resources :contacts, except: [:destroy] do
     get :make_call, on: :member
     get :make_related_call, on: :member
