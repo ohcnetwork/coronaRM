@@ -30,7 +30,7 @@
                                 Since Contact
                             </th>
                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-600 uppercase tracking-wider">
-                                District
+                                Last Called
                             </th>
                         </tr>
                     </thead>
@@ -74,7 +74,12 @@
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-xs font-medium leading-5 text-gray-600">
                                 <%= link_to contact do %>
-                                    <%= contact.district.name.upcase %>
+                                    <% last_call = contact.calls.order("created_at").last %>
+                                        <% if last_call %>
+                                            Called <span class="font-bold"><%= time_ago_in_words(last_call.created_at) %></span> ago
+                                        <% else %>
+                                            Not called yet
+                                        <% end %>
                                 <% end %>
                             </td>
                         </tr>
