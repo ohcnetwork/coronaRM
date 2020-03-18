@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_17_105018) do
+ActiveRecord::Schema.define(version: 2020_03_17_185811) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,8 +60,16 @@ ActiveRecord::Schema.define(version: 2020_03_17_105018) do
     t.string "phc_name"
     t.date "date_of_first_contact"
     t.string "mode_of_contact"
+    t.bigint "district_id"
+    t.index ["district_id"], name: "index_contacts_on_district_id"
     t.index ["infector_id"], name: "index_contacts_on_infector_id"
     t.index ["patient_id"], name: "index_contacts_on_patient_id", unique: true
+  end
+
+  create_table "districts", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "medical_reqs", force: :cascade do |t|
@@ -106,13 +114,16 @@ ActiveRecord::Schema.define(version: 2020_03_17_105018) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "role"
+    t.string "role"
+    t.bigint "district_id"
+    t.index ["district_id"], name: "index_users_on_district_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "calls", "contacts"
   add_foreign_key "calls", "users"
+  add_foreign_key "contacts", "districts"
   add_foreign_key "medical_reqs", "contacts"
   add_foreign_key "non_medical_reqs", "contacts"
   add_foreign_key "previous_medical_conditions", "contacts"
