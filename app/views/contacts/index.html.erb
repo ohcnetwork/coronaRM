@@ -76,7 +76,11 @@
                                 <%= link_to contact do %>
                                     <% last_call = contact.calls.order("created_at").last %>
                                         <% if last_call %>
-                                            Called <span class="font-bold"><%= time_ago_in_words(last_call.created_at) %></span> ago
+                                            <% if last_call.not_reachable %>
+                                                Not Reachable <span class="font-bold"><%= time_ago_in_words(last_call.created_at) %></span> ago
+                                            <% else %>
+                                                Called <span class="font-bold"><%= time_ago_in_words(last_call.created_at) %></span> ago
+                                            <% end %>
                                         <% else %>
                                             Not called yet
                                         <% end %>

@@ -68,7 +68,16 @@ class ContactsController < ApplicationController
 
   def make_call
     called_user = User.find(params[:user_id])
-    @contact.callees << called_user
+    @contact.calls.create(user: called_user)
+    respond_to do |format|
+      format.html { redirect_to contacts_path, notice: "Contact #{@contact.name} was successfully Called" }
+      format.json { head :no_content }
+    end
+  end
+
+  def call_not_reachable
+    called_user = User.find(params[:user_id])
+    @contact.calls.create(user: called_user, not_reachable: true)
     respond_to do |format|
       format.html { redirect_to contacts_path, notice: "Contact #{@contact.name} was successfully Called" }
       format.json { head :no_content }

@@ -11,7 +11,9 @@ Rails.application.routes.draw do
 
   resources :contacts, except: [:destroy] do
     get :make_call, on: :member
+    get :call_not_reachable, on: :member
     get :make_related_call, on: :member
+
     resources :non_medical_reqs do
       get :fullfill, on: :member
     end
