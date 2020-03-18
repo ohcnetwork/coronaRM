@@ -16,4 +16,12 @@ class DashboardController < ApplicationController
       format.csv { send_data @contacts.to_csv, filename: "users-#{Date.today}.csv" }
     end
   end
+
+  def generate_csv_called_report
+    @contacted_today = Contact.joins(:calls).where(calls:{created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day})
+    respond_to do |format|
+      format.html
+      format.csv { send_data @contacted_today.to_csv, filename: "users-#{Date.today}.csv" }
+    end
+  end
 end
