@@ -91,7 +91,9 @@
                         <li class="my-2"><span class="font-bold">Panchayath: </span><%= @contact.panchayath %></span></li>
                         <li class="my-2"><span class="font-bold">Landmark: </span><%= @contact.panchayath %></span></li>
                         <li class="my-2"><span class="font-bold">District: </span><%= @contact.district.name.capitalize %></span></li>
-                        <li class="my-4"><span class="font-bold">PHC: </span><%= @contact.phc_name.titleize %></span></li>
+                        <% if @contact.phc_name %>
+                            <li class="my-4"><span class="font-bold">PHC: </span><%= @contact.phc_name.titleize %></span></li>
+                        <% end %>
                     </ul>
                 </dd>
             </div>
@@ -173,7 +175,9 @@
                         <% end %>
                         <% end %>
                     </ul>
-                    <%= @contact.med_other %>
+                    <p class="mt-2">
+                        <%= @contact.med_other %>
+                    </p>
                     <div class="mt-4">
                         <hr />
                         <h4 class="mt-4 text-gray-600">Add Medical Requirements</h4>
