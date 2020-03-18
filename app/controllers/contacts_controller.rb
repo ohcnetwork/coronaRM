@@ -75,6 +75,17 @@ class ContactsController < ApplicationController
     end
   end
 
+  def make_related_call
+    called_user = User.find(params[:user_id])
+    parent_contact = Contact.find(params[:parent_id])
+    related_contact = Contact.find(params[:related_contact_id])
+    related_contact.callees << called_user
+    respond_to do |format|
+      format.html { redirect_to parent_contact, notice: "Contact #{related_contact.name} was successfully Called" }
+      format.json { head :no_content }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_contact
