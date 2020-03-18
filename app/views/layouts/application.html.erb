@@ -21,7 +21,7 @@
           <div class="flex text-sm items-center">
           <% if current_user.try(:admin?) %>
               <p>
-                  <%= link_to 'Create new User', new_user_session_path, class: 'inline-flex items-center px-3 py-2 rounded-md text-sm font-medium leading-5 bg-indigo-100 text-indigo-800' %>
+                  <%= link_to 'Create new User', new_user_registration_path, class: 'inline-flex items-center px-3 py-2 rounded-md text-sm font-medium leading-5 bg-indigo-100 text-indigo-800' %>
               </p>
           <% end %>
 

@@ -23,7 +23,7 @@
         <%= f.input :ward %>
         <%= f.input :panchayath %>
         <%= f.input :landmark %>
-        <%= f.input :district, input_html: {class: 'form-select'}%>
+        <%= f.association :district, collection: District.all(),input_html: {class: 'form-select'}%>
     </div>
 
     <!--
