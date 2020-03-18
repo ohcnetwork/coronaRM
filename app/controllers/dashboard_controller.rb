@@ -1,4 +1,6 @@
 class DashboardController < ApplicationController
+  before_action :authenticate_user!, :redirect_unless_admin 
+
   def index
     @contacts_count = Contact.all.count()
     @primary_contacts_count  = Contact.where(tracking_type: :primary).count
@@ -22,6 +24,14 @@ class DashboardController < ApplicationController
     respond_to do |format|
       format.html
       format.csv { send_data @contacted_today.to_csv, filename: "users-#{Date.today}.csv" }
+    end
+  end
+
+  private
+  def redirect_unless_admin
+    unless current_user.try(:admin?)
+      flash[:alert] = "Access Denied! Only Admins are Allowed Access"
+      redirect_to root_path
     end
   end
 end
