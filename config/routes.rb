@@ -5,9 +5,7 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { :registrations => 'registrations'}
 
   resources :dashboard, only: [:index] do
-    collection do
-      get 'generate_csv_report'
-    end
+    get :generate_csv_report, on: :collection
   end
 
   resources :contacts, except: [:destroy] do
