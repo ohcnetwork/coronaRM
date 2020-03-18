@@ -18,7 +18,7 @@ class Contact < ApplicationRecord
   belongs_to :district
 
   def self.to_csv
-    attributes = %w{patient_id name tracking_type isolation_type risk non_medical_reqs medical_reqs previous_medical_conditions symptoms phone age gender house_name ward panchayath town district phc_name date_of_first_contact mode_of_contact infector infectees }
+    attributes = %w{patient_id name tracking_type isolation_type risk non_medical_reqs non_medical_other medical_reqs medical_other previous_medical_conditions symptoms phone age gender house_name ward panchayath town district phc_name date_of_first_contact mode_of_contact infector infectees }
 
     CSV.generate(headers: true) do |csv|
        csv << attributes
@@ -31,7 +31,9 @@ class Contact < ApplicationRecord
           contact.isolation_type, 
           contact.risk,
           contact.non_medical_reqs.pluck(:requirement_type).join(', '),
+          contact.non_med_other,
           contact.medical_reqs.pluck(:requirement_type).join(', '),
+          contact.med_other,
           contact.previous_medical_conditions.pluck(:condition_type).join(', '),
           contact.symptoms.pluck(:symptom_type).join(', '),
           contact.phone,
