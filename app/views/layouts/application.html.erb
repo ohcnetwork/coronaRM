@@ -18,15 +18,15 @@
               <h4 class="font-bold">Corona RM</h4>
           <% end %>
 
-          <div class="flex text-sm">
+          <div class="flex text-sm items-center">
           <% if current_user.try(:admin?) %>
               <p>
-                  <%= link_to 'Create new User', new_user_session_path, class: 'ml-2 inline-block rounded-md' %>
+                  <%= link_to 'Create new User', new_user_session_path, class: 'inline-flex items-center px-3 py-2 rounded-md text-sm font-medium leading-5 bg-indigo-100 text-indigo-800' %>
               </p>
           <% end %>
 
           <% if user_signed_in? %>
-              <%= link_to 'Log out', destroy_user_session_path, method: :delete, class: 'ml-2 inline-block rounded-md' %>
+              <%= link_to 'Log out', destroy_user_session_path, method: :delete, class: 'ml-4 inline-block rounded-md' %>
           <% else %>
               <%= link_to 'Log in', new_user_session_path ,class: 'ml-2 text-md inline-block rounded-md' %>
           <% end %>
