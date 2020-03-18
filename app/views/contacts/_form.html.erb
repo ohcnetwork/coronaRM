@@ -6,7 +6,7 @@
     </div>
     <div>
         <%= f.input :age %>
-        <%= f.input :sex, input_html: {class: 'form-select'}%>
+        <%= f.input :gender, input_html: {class: 'form-select'}%>
     </div>
 
     <div class="">
@@ -23,7 +23,7 @@
         <%= f.input :ward %>
         <%= f.input :panchayath %>
         <%= f.input :landmark %>
-        <%= f.input :district, input_html: {class: 'form-select'}%>
+        <%= f.association :district, collection: District.all(),input_html: {class: 'form-select'}%>
     </div>
 
     <!--
