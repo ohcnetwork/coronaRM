@@ -57,7 +57,7 @@
                                     <% if contact.try(:flight_passenger?) %>
                                         <%= content_tag :span, 'Flight Passenger' ,class: "px-2 inline-flex text-xs leading-5 font-semibold rounded-full text-gray-600 #{contact.tracking_type.to_s == "primary" ? 'bg-red-100 text-red-800' : 'bg-gray-200'}" %>
                                     <% else %>
-                                        <%= content_tag :span, contact.tracking_type.to_s.capitalize,class: "px-2 inline-flex text-xs leading-5 font-semibold rounded-full text-gray-600 #{@contact.tracking_type.to_s == "primary" ? 'bg-red-100 text-red-800' : 'bg-gray-200'}" %>
+                                        <%= content_tag :span, contact.tracking_type.to_s.capitalize,class: "px-2 inline-flex text-xs leading-5 font-semibold rounded-full text-gray-600 #{contact.tracking_type.to_s == "primary" ? 'bg-red-100 text-red-800' : 'bg-gray-200'}" %>
                                     <% end %>
                                 <% end %>
                             </td>

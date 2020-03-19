@@ -19,13 +19,14 @@ class Contact < ApplicationRecord
   has_one :flight_detail
 
   def self.to_csv
-    attributes = %w{patient_id name tracking_type isolation_type risk non_medical_reqs non_medical_other medical_reqs medical_other previous_medical_conditions symptoms phone age gender house_name ward panchayath town district phc_name date_of_first_contact mode_of_contact infector infectees }
+    attributes = %w{id patient_id name tracking_type isolation_type risk non_medical_reqs non_medical_other medical_reqs medical_other previous_medical_conditions symptoms phone age gender house_name ward panchayath town district phc_name date_of_first_contact mode_of_contact infector infectees }
 
     CSV.generate(headers: true) do |csv|
        csv << attributes
 
       all.each do |contact|
         csv << [
+          contact.id,
           contact.patient_id,
           contact.name,
           contact.tracking_type, 
