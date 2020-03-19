@@ -12,6 +12,7 @@ class DashboardController < ApplicationController
     @number_of_flight_passengers_contacted_today = Contact.joins(:calls).where(tracking_type: :flight_passenger,calls:{created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day}).distinct.count
     @number_of_primary_contacted_today = Contact.joins(:calls).where(tracking_type: :primary,calls:{created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day}).distinct.count
     @number_of_secondary_contacted_today = Contact.joins(:calls).where(tracking_type: :secondary, calls:{created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day}).distinct.count
+    @number_of_health_workers_flight_travellers = Contact.where(tracking_type: :flight_passenger)
   end
 
   def csv_report
@@ -32,6 +33,14 @@ class DashboardController < ApplicationController
 
   def called_report_today
     @contacted_today = Contact.joins(:calls).where(calls:{created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day}).distinct
+    respond_to do |format|
+      format.html
+      format.csv { send_data @contacted_today.to_csv, filename: "users-#{Date.today}.csv" }
+    end
+  end
+
+  def not_reachable_report_today
+    @contacted_today = Contact.joins(:calls).where(calls:{created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day, not_reachable: true}).distinct
     respond_to do |format|
       format.html
       format.csv { send_data @contacted_today.to_csv, filename: "users-#{Date.today}.csv" }

@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :dashboard, only: [:index] do
     get :csv_report, on: :collection
     get :called_report_today, on: :collection
+    get :not_reachable_report_today, on: :collection
     get :report_travellers, on: :collection
     get :medical_needs_report_today, on: :collection
     get :non_medical_needs_report_today, on: :collection
