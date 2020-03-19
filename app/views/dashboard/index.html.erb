@@ -94,6 +94,38 @@
 
 <section class="mt-8">
     <hr class="block py-4" />
+    <h2 class="font-bold font-xl">Flight Passengers</h2>
+    <div class="mt-2 flex">
+        <div class="bg-white inline-block px-5 py-4 rounded-md shadow-lg">
+            <h3 class="uppercase text-xs font-medium text-gray-600">No of Health Workers</h3>
+            <p class="text-3xl font-bold">
+                <%= @number_of_health_workers_flight_passengers %>
+            </p>
+        </div>
+        <div class="ml-4 bg-white inline-block px-5 py-4 rounded-md shadow-lg">
+            <h3 class="uppercase text-xs font-medium text-gray-600">Flight Passengers</h3>
+            <p class="text-3xl font-bold">
+                <%= @number_of_flight_passengers_contacted_today %>
+            </p>
+        </div>
+        <div class="ml-4 bg-white inline-block px-5 py-4 rounded-md shadow-lg">
+            <h3 class="uppercase text-xs font-medium text-gray-600">Primary Contacts</h3>
+            <p class="text-3xl font-bold">
+                <%= @number_of_primary_contacted_today %>
+            </p>
+        </div>
+        <div class="ml-4 bg-white inline-block px-5 py-4 rounded-md shadow-lg">
+            <h3 class="uppercase text-xs font-medium text-gray-600">Secondary Contacts</h3>
+            <p class="text-3xl font-bold">
+                <%= @number_of_secondary_contacted_today %>
+            </p>
+        </div>
+    </div>
+    <div class="mt-4 flex">
+    </div>
+</section>
+<section class="mt-8">
+    <hr class="block py-4" />
     <h2 class="font-bold font-xl">Generate Reports</h2>
     <div class="mt-4 flex">
         <%= link_to "Report of All Contacts", csv_report_dashboard_index_path(format: :csv) ,class: "inline-flex items-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-15" %>
