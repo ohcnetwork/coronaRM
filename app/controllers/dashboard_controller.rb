@@ -65,6 +65,15 @@ class DashboardController < ApplicationController
     end
   end
 
+  def health_care_workers
+    contacts = Contact.left_outer_joins(:flight_detail).where(tracking_type: :flight_passenger, flight_details: {is_health_worker: true}).distinct
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data contacts.to_csv, filename: "users-#{Date.today}.csv" }
+    end
+  end
+
   private
   def redirect_unless_admin
     unless current_user.try(:admin?)

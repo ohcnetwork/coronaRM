@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     get :report_travellers, on: :collection
     get :medical_needs_report_today, on: :collection
     get :non_medical_needs_report_today, on: :collection
+    get :health_care_workers, on: :collection
   end
 
   resources :contacts, except: [:destroy] do
