@@ -26,6 +26,14 @@ document.addEventListener("turbolinks:load", function() {
         var text = input.value;
         Turbolinks.visit('/contacts/' + text);
     }
+
+    input.addEventListener("keyup", function(event) {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            // Trigger the button element with a click
+            button.click();
+        }
+    });
 })
 
 // Include Inter Typeface
