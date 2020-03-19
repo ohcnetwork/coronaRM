@@ -36,20 +36,28 @@
                     Status
                 </dt>
                 <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
+                    <% if @contact.try(:flight_passenger?) %>
+                    <%= content_tag :span, 'Flight Passenger' ,class: "px-2 inline-flex text-xs leading-5 font-semibold rounded-full text-gray-600 #{@contact.tracking_type.to_s == "primary" ? 'bg-red-100 text-red-800' : 'bg-gray-200'}" %>
+                    <% else %>
                     <%= content_tag :span, @contact.tracking_type.to_s.capitalize + ' Contact' ,class: "px-2 inline-flex text-xs leading-5 font-semibold rounded-full text-gray-600 #{@contact.tracking_type.to_s == "primary" ? 'bg-red-100 text-red-800' : 'bg-gray-200'}" %>
+                    <% end %>
                     <%= content_tag :span, @contact.risk.to_s.capitalize + ' Risk' ,class: "ml-1 px-2 inline-flex text-xs leading-5 font-semibold rounded-full text-gray-600 #{@contact.risk.to_s == "high" ? 'bg-red-100 text-red-800' : 'bg-gray-200'}" %>
                     <%= content_tag :span, @contact.isolation_type.to_s.titleize ,class: "ml-1 px-2 inline-flex text-xs leading-5 font-semibold rounded-full text-gray-600 #{@contact.isolation_type.to_s != "home_isolation" ? 'bg-red-100 text-red-800' : 'bg-gray-200'}" %>
                 </dd>
             </div>
             <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:px-6 sm:py-5">
                 <dt class="text-sm leading-5 font-medium text-gray-500">
-                    Date of Contact with Infector
+                    Days in Quarentine
                 </dt>
                 <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
+                    <% if @contact.try(:flight_passenger?) && @contact.flight_detail.date_of_arrival %>
+                    <%= time_ago_in_words(@contact.flight_detail.date_of_arrival) %>
+                    <% else %>
                     <% if @contact.date_of_first_contact %>
                     <%= time_ago_in_words(@contact.date_of_first_contact) %>
                     <% else %>
                     Unknown
+                    <% end %>
                     <% end %>
                 </dd>
             </div>
@@ -67,13 +75,13 @@
                 </dt>
                 <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
                     <% if @last_call %>
-                        <% if @last_call.not_reachable %>
-                            Not Reachable <span class="font-bold"><%= time_ago_in_words(@last_call.created_at) %></span> ago, by <%= @last_call.user.email %>
-                        <% else %>
-                            Called <span class="font-bold"><%= time_ago_in_words(@last_call.created_at) %></span> ago, by <%= @last_call.user.email %>
-                        <% end %>
+                    <% if @last_call.not_reachable %>
+                    Not Reachable <span class="font-bold"><%= time_ago_in_words(@last_call.created_at) %></span> ago, by <%= @last_call.user.email %>
                     <% else %>
-                        Not called yet
+                    Called <span class="font-bold"><%= time_ago_in_words(@last_call.created_at) %></span> ago, by <%= @last_call.user.email %>
+                    <% end %>
+                    <% else %>
+                    Not called yet
                     <% end %>
                 </dd>
             </div>
@@ -97,7 +105,7 @@
                         <li class="my-2"><span class="font-bold">Landmark: </span><%= @contact.landmark %></span></li>
                         <li class="my-2"><span class="font-bold">District: </span><%= @contact.district.name.capitalize %></span></li>
                         <% if @contact.phc_name %>
-                            <li class="my-4"><span class="font-bold">PHC: </span><%= @contact.phc_name.titleize %></span></li>
+                        <li class="my-4"><span class="font-bold">PHC: </span><%= @contact.phc_name.titleize %></span></li>
                         <% end %>
                     </ul>
                 </dd>
@@ -115,14 +123,14 @@
                 </dd>
             </div>
             <% if @contact.try(:flight_passenger?) %>
-                <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:px-6 sm:py-5">
-                    <dt class="text-sm leading-5 font-medium text-gray-500">
-                        Flight Detail
-                    </dt>
-                    <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-                        <%= render 'flight_detail/form' %>
-                    </dd>
-                </div>
+            <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:px-6 sm:py-5">
+                <dt class="text-sm leading-5 font-medium text-gray-500">
+                    Flight Detail
+                </dt>
+                <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
+                    <%= render 'flight_detail/form' %>
+                </dd>
+            </div>
             <% end %>
             <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:px-6 sm:py-5">
                 <dt class="text-sm leading-5 font-medium text-gray-500">
@@ -277,11 +285,11 @@
                             <div class="flex">
                                 <% last_call = related_contact.calls.order("created_at").last %>
                                 <% if last_call%>
-                                    <p>
-                                        Called <span class="font-bold"><%= time_ago_in_words(last_call.created_at) %></span> ago
-                                    </p>
+                                <p>
+                                    Called <span class="font-bold"><%= time_ago_in_words(last_call.created_at) %></span> ago
+                                </p>
                                 <% else %>
-                                    Not called yet
+                                Not called yet
                                 <% end %>
                                 <div class="ml-2 flex-shrink-0">
                                     <%= link_to 'Mark as Called', make_related_call_contact_path(related_contact_id: related_contact.id, user_id: @current_user.id, parent_id: @contact.id), class: 'inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium leading-5 bg-red-100 text-red-800' %>
