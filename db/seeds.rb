@@ -51,7 +51,7 @@ end
 def populate_traveller_from_data_file
   contacts = []
   CSV.foreach(Rails.root.join('data/traveller.csv'), headers: true) do |row|
-    contact = Contact.create({
+    Contact.create({
                      name: row[0],
                      phone: row[1],
                      house_name: row[2],
@@ -63,15 +63,17 @@ def populate_traveller_from_data_file
                      tracking_type: "flight_passenger",
                      district_id: District.find_by(name: "Pathanamthitta").id
                    })
-    contacts.push(contact)
   end
   CSV.foreach(Rails.root.join('data/traveller.csv'), headers: true) do |row|
     contact = Contact.find_by(name: row[0], phone: row[1])
-    FlightDetail.create({
-                                           arrival_airport: row[5],
-                                           contact_id: contact.id
-                             })
+    flight = contact.flight_detail || contact.build_flight_detail({
+                                  arrival_airport: row[5],
+                                  contact_id: contact.id
+                                })
+    flight.save!
   end
 end
 
+User.create({email: "admin@gmail.com", password: "test123", password_confirmation: "test123", district_id: 11})
+create_districts
 populate_traveller_from_data_file()
