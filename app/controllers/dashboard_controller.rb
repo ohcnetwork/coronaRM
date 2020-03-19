@@ -14,7 +14,7 @@ class DashboardController < ApplicationController
     @number_of_secondary_contacted_today = Contact.joins(:calls).where(tracking_type: :secondary, calls:{created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day}).distinct.count
   end
 
-  def generate_csv_report
+  def csv_report
     @contacts = Contact.all()
     respond_to do |format|
       format.html
@@ -22,7 +22,7 @@ class DashboardController < ApplicationController
     end
   end
 
-  def generate_csv_report_travellers
+  def report_travellers
     @contacts = Contact.where(tracking_type: "flight_passenger")
     respond_to do |format|
       format.html
@@ -30,7 +30,7 @@ class DashboardController < ApplicationController
     end
   end
 
-  def generate_csv_called_report
+  def called_report_today
     @contacted_today = Contact.joins(:calls).where(calls:{created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day}).distinct
     respond_to do |format|
       format.html
@@ -38,9 +38,18 @@ class DashboardController < ApplicationController
     end
   end
 
-  def generate_csv_medical_needs_report
+  def medical_needs_report_today
     today = Time.zone.now.beginning_of_day..Time.zone.now.end_of_day
     @contacted_today = Contact.joins(:calls, :medical_reqs).where(calls:{created_at: today}).where({medical_reqs: {created_at: today}}).distinct
+    respond_to do |format|
+      format.html
+      format.csv { send_data @contacted_today.to_csv, filename: "users-#{Date.today}.csv" }
+    end
+  end
+
+  def non_medical_needs_report_today
+    today = Time.zone.now.beginning_of_day..Time.zone.now.end_of_day
+    @contacted_today = Contact.joins(:calls, :non_medical_reqs).where(calls:{created_at: today}).where({non_medical_reqs: {created_at: today}}).distinct
     respond_to do |format|
       format.html
       format.csv { send_data @contacted_today.to_csv, filename: "users-#{Date.today}.csv" }

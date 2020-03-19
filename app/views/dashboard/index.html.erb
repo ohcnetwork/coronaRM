@@ -96,13 +96,10 @@
     <hr class="block py-4" />
     <h2 class="font-bold font-xl">Generate Reports</h2>
     <div class="mt-4 flex">
-        <%= link_to "Report of All Contacts", generate_csv_report_dashboard_index_path(format: :csv) ,class: "inline-flex items-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-15" %>
+        <%= link_to "Report of All Contacts", csv_report_dashboard_index_path(format: :csv) ,class: "inline-flex items-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-15" %>
     </div>
     <div class="mt-4 flex">
-        <%= link_to "Report of All Contacts Called Today", generate_csv_called_report_dashboard_index_path(format: :csv) ,class: "inline-flex items-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-15" %>
-    </div>
-    <div class="mt-4 flex">
-        <%= link_to "Report of Medical Needs Today", generate_csv_medical_needs_report_dashboard_index_path(format: :csv) ,class: "inline-flex items-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-15" %>
+        <%= link_to "Report of All Contacts Called Today", called_report_today_dashboard_index_path(format: :csv) ,class: "inline-flex items-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-15" %>
     </div>
 </section>
 
@@ -110,7 +107,7 @@
     <hr class="block py-4" />
     <h2 class="font-bold font-xl">Flight Passenger Reports</h2>
     <div class="mt-4 flex">
-        <%= link_to "Full Report of Travellers", generate_csv_report_travellers_dashboard_index_path(format: :csv) ,class: "inline-flex items-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-15" %>
+        <%= link_to "Full Report of Travellers", report_travellers_dashboard_index_path(format: :csv) ,class: "inline-flex items-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-15" %>
     </div>
     <div class="mt-4 flex">
     </div>
