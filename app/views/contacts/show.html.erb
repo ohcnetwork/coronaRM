@@ -104,6 +104,18 @@
             </div>
             <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:px-6 sm:py-5">
                 <dt class="text-sm leading-5 font-medium text-gray-500">
+                    Health Institution
+                </dt>
+                <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
+                    <ul>
+                        <li class="my-2"><span class="font-bold">Health Institution: </span> <span><%= @contact.try(:health_institution) %></span></li>
+                        <li class="my-2"><span class="font-bold">Field Staff: </span> <span><%= @contact.try(:field_staff_name) %></span></li>
+                        <li class="my-2"><span class="font-bold">Field Staff Phone: </span> <span><%= @contact.try(:field_staff_phone) %></span></li>
+                    </ul>
+                </dd>
+            </div>
+            <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:px-6 sm:py-5">
+                <dt class="text-sm leading-5 font-medium text-gray-500">
                     Previous Medical Conditions
                 </dt>
                 <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
