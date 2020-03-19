@@ -43,7 +43,7 @@
                         <tr class="bg-white">
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 font-medium text-gray-900">
                                 <%= link_to contact do %>
-                                    <div class="text-sm leading-5 text-gray-900"><%= contact.name.titleize %></div>
+                                    <div class="text-sm truncate leading-5 text-gray-900"><%= contact.name.try(:titleize) %></div>
                                     <div class="text-sm leading-5 text-gray-600"><%= contact.patient_id %></div>
                                 <% end %>
                             </td>
