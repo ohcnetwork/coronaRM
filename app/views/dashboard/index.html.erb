@@ -44,11 +44,17 @@
             </p>
         </div>
     </div>
-    <div class="mt-2 flex">
+    <div class="mt-4 flex">
         <div class="bg-white inline-block px-5 py-4 rounded-md shadow-lg">
             <h3 class="uppercase text-xs font-medium text-gray-600">Contacts Left to Call</h3>
             <p class="text-3xl font-bold">
                 <%= @contacts_count - @number_of_contacts_contacted_today %>
+            </p>
+        </div>
+        <div class="ml-4 bg-white inline-block px-5 py-4 rounded-md shadow-lg">
+            <h3 class="uppercase text-xs font-medium text-gray-600">Unreachable Contacts</h3>
+            <p class="text-3xl font-bold">
+                <%= @number_of_unreachable_contacts_contacted_today %>
             </p>
         </div>
         <div class="ml-4 bg-white inline-block px-5 py-4 rounded-md shadow-lg">

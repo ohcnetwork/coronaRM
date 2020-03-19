@@ -17,6 +17,25 @@ document.addEventListener("turbolinks:load", function() {
     var dropDownSelects = new Choices('#infector-select')
 })
 
+// Search by Contact ID
+document.addEventListener("turbolinks:load", function() {
+    var button = document.getElementById("contact_search_button");
+    var input = document.getElementById("contact_search_input");
+
+    button.onclick = function () {
+        var text = input.value;
+        Turbolinks.visit('/contacts/' + text);
+    }
+
+    input.addEventListener("keyup", function(event) {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            // Trigger the button element with a click
+            button.click();
+        }
+    });
+})
+
 // Include Inter Typeface
 import 'typeface-inter'
 
