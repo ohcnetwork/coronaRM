@@ -7,7 +7,12 @@ class ContactsController < ApplicationController
   # GET /contacts
   # GET /contacts.json
   def index
-    @contacts = Contact.order(patient_id: :asc)
+    contacts_called_by_user_today = Contact.joins(:calls).where(calls: {user_id: current_user.id, created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day}).distinct.order(patient_id: :asc)
+    if current_user.try(:admin?)
+      @contacts = Contact.order(patient_id: :asc)
+    else
+      @contacts = contacts_called_by_user_today
+    end
   end
 
   # GET /contacts/1
@@ -68,7 +73,16 @@ class ContactsController < ApplicationController
 
   def make_call
     called_user = User.find(params[:user_id])
-    @contact.callees << called_user
+    @contact.calls.create(user: called_user)
+    respond_to do |format|
+      format.html { redirect_to contacts_path, notice: "Contact #{@contact.name} was successfully Called" }
+      format.json { head :no_content }
+    end
+  end
+
+  def call_not_reachable
+    called_user = User.find(params[:user_id])
+    @contact.calls.create(user: called_user, not_reachable: true)
     respond_to do |format|
       format.html { redirect_to contacts_path, notice: "Contact #{@contact.name} was successfully Called" }
       format.json { head :no_content }

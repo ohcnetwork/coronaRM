@@ -9,8 +9,9 @@
             </p>
         </div>
         <div>
-            <%= link_to 'Edit Contact', edit_contact_path(@contact), class: 'inline-block items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-gray-900 hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-indigo active:bg-gray-700 transition ease-in-out duration-150' %>
-            <%= link_to 'Mark as Called', make_call_contact_path(@contact, user_id: @current_user.id), class: 'inline-block items-center ml-2 px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-indigo active:bg-red-700 transition ease-in-out duration-150' %>
+            <%= link_to 'Edit Contact', edit_contact_path(@contact), class: 'inline-flex items-center px-3 py-2 rounded-md text-sm font-medium leading-5 bg-gray-100 text-gray-800' %>
+            <%= link_to 'Not Reachable', call_not_reachable_contact_path(@contact, user_id: @current_user.id), class: 'ml-4 inline-flex items-center px-3 py-2 rounded-md text-sm font-medium leading-5 bg-red-100 text-red-800' %>
+            <%= link_to 'Mark as Called', make_call_contact_path(@contact, user_id: @current_user.id), class: 'ml-1 inline-flex items-center px-3 py-2 text-sm rounded-md font-medium leading-5 bg-green-100 text-green-800' %>
         </div>
     </div>
     <div class="px-4 py-5 sm:p-0">
@@ -66,9 +67,13 @@
                 </dt>
                 <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
                     <% if @last_call %>
-                    Called <span class="font-bold"><%= time_ago_in_words(@last_call.created_at) %></span> ago, by <%= @last_call.user.email %>
+                        <% if @last_call.not_reachable %>
+                            Not Reachable <span class="font-bold"><%= time_ago_in_words(@last_call.created_at) %></span> ago, by <%= @last_call.user.email %>
+                        <% else %>
+                            Called <span class="font-bold"><%= time_ago_in_words(@last_call.created_at) %></span> ago, by <%= @last_call.user.email %>
+                        <% end %>
                     <% else %>
-                    Not called yet
+                        Not called yet
                     <% end %>
                 </dd>
             </div>
@@ -94,6 +99,18 @@
                         <% if @contact.phc_name %>
                             <li class="my-4"><span class="font-bold">PHC: </span><%= @contact.phc_name.titleize %></span></li>
                         <% end %>
+                    </ul>
+                </dd>
+            </div>
+            <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:px-6 sm:py-5">
+                <dt class="text-sm leading-5 font-medium text-gray-500">
+                    Health Institution
+                </dt>
+                <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
+                    <ul>
+                        <li class="my-2"><span class="font-bold">Health Institution: </span> <span><%= @contact.try(:health_institution) %></span></li>
+                        <li class="my-2"><span class="font-bold">Field Staff: </span> <span><%= @contact.try(:field_staff_name) %></span></li>
+                        <li class="my-2"><span class="font-bold">Field Staff Phone: </span> <span><%= @contact.try(:field_staff_phone) %></span></li>
                     </ul>
                 </dd>
             </div>

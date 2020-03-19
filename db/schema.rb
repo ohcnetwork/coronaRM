@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_17_185811) do
+ActiveRecord::Schema.define(version: 2020_03_19_011418) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 2020_03_17_185811) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "not_reachable"
     t.index ["contact_id"], name: "index_calls_on_contact_id"
     t.index ["user_id"], name: "index_calls_on_user_id"
   end
@@ -61,6 +62,9 @@ ActiveRecord::Schema.define(version: 2020_03_17_185811) do
     t.date "date_of_first_contact"
     t.string "mode_of_contact"
     t.bigint "district_id"
+    t.string "health_institution"
+    t.string "field_staff_name"
+    t.string "field_staff_phone"
     t.index ["district_id"], name: "index_contacts_on_district_id"
     t.index ["infector_id"], name: "index_contacts_on_infector_id"
     t.index ["patient_id"], name: "index_contacts_on_patient_id", unique: true

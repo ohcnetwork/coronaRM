@@ -26,6 +26,13 @@
         <%= f.association :district, collection: District.all(),input_html: {class: 'form-select'}%>
     </div>
 
+    <div>
+        <hr class="pb-4" />
+        <%= f.input :health_institution %>
+        <%= f.input :field_staff_name %>
+        <%= f.input :field_staff_phone %>
+    </div>
+
     <!--
     <div>
         <hr class="pb-4" />
