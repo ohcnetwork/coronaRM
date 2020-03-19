@@ -10,9 +10,10 @@
 <div class="mt-4">
     <hr class="pb-2" />
     <%= f.input :profession%>
+    <%= f.input :is_health_worker, label: "Is Health Worker or Medical Profession ?",input_html: {class: 'mr-2 form-checkbox p-2'}, wrapper_html: {class: 'my-3'}%>
 </div>
 
-<div class="mt-4 pl-2">
+<div class="mt-4">
     <%= f.button :submit, 'Save', 'data-turbolinks-scroll': false, class:'inline-flex items-center px-3 py-3 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150' %>
 </div>
 <% end %>
