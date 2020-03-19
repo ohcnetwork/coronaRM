@@ -7,7 +7,12 @@ class ContactsController < ApplicationController
   # GET /contacts
   # GET /contacts.json
   def index
-    @contacts = Contact.order(patient_id: :asc)
+    contacts_called_by_user_today = Contact.joins(:calls).where(calls: {user_id: current_user.id, created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day}).distinct.order(patient_id: :asc)
+    if current_user.try(:admin?)
+      @contacts = Contact.order(patient_id: :asc)
+    else
+      @contacts = contacts_called_by_user_today
+    end
   end
 
   # GET /contacts/1
