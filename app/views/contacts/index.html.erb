@@ -43,7 +43,7 @@
                         <tr class="bg-white">
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 font-medium text-gray-900">
                                 <%= link_to contact do %>
-                                    <div class="text-sm leading-5 text-gray-900"><%= contact.name.titleize %></div>
+                                    <div class="text-sm truncate leading-5 text-gray-900"><%= contact.name.try(:titleize) %></div>
                                     <div class="text-sm leading-5 text-gray-600"><%= contact.patient_id %></div>
                                 <% end %>
                             </td>
@@ -54,7 +54,11 @@
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-center text-sm leading-5 font-medium">
                                 <%= link_to contact do %>
-                                    <%= content_tag :span, contact.tracking_type.to_s.capitalize ,class: "px-2 inline-flex text-xs leading-5 font-semibold rounded-full text-gray-600 #{contact.tracking_type.to_s == "primary" ? 'bg-red-100 text-red-800' : 'bg-gray-200'}" %>
+                                    <% if contact.try(:flight_passenger?) %>
+                                        <%= content_tag :span, 'Flight Passenger' ,class: "px-2 inline-flex text-xs leading-5 font-semibold rounded-full text-gray-600 #{contact.tracking_type.to_s == "primary" ? 'bg-red-100 text-red-800' : 'bg-gray-200'}" %>
+                                    <% else %>
+                                        <%= content_tag :span, contact.tracking_type.to_s.capitalize,class: "px-2 inline-flex text-xs leading-5 font-semibold rounded-full text-gray-600 #{contact.tracking_type.to_s == "primary" ? 'bg-red-100 text-red-800' : 'bg-gray-200'}" %>
+                                    <% end %>
                                 <% end %>
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-600">

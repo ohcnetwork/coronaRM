@@ -14,7 +14,7 @@ import 'alpinejs'
 
 const Choices = require('choices.js')
 document.addEventListener("turbolinks:load", function() {
-    var dropDownSelects = new Choices('#infector-select')
+    var dropDownSelects = new Choices('#dropdown-choice-select')
 })
 
 // Search by Contact ID

@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :dashboard, only: [:index] do
     get :generate_csv_report, on: :collection
     get :generate_csv_called_report, on: :collection
+    get :generate_csv_report_travellers, on: :collection
   end
 
   resources :contacts, except: [:destroy] do
@@ -23,6 +24,8 @@ Rails.application.routes.draw do
     resources :previous_medical_conditions do
     end
     resources :symptoms do
+    end
+    resources :flight_details do
     end
   end
 end

@@ -20,6 +20,14 @@ class DashboardController < ApplicationController
     end
   end
 
+  def generate_csv_report_travellers
+    @contacts = Contact.where(tracking_type: "flight_passenger")
+    respond_to do |format|
+      format.html
+      format.csv { send_data @contacts.to_csv, filename: "users-#{Date.today}.csv" }
+    end
+  end
+
   def generate_csv_called_report
     @contacted_today = Contact.joins(:calls).where(calls:{created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day}).distinct
     respond_to do |format|

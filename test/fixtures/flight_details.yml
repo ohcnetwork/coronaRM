@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  contact: one
+  date_of_arrival: 2020-03-19
+  flight_number: MyString
+  arrival_airport: MyString
+  departure_country: MyString
+  profession: MyString
+  connecting_flight_details: MyString
+
+two:
+  contact: two
+  date_of_arrival: 2020-03-19
+  flight_number: MyString
+  arrival_airport: MyString
+  departure_country: MyString
+  profession: MyString
+  connecting_flight_details: MyString
