@@ -58,7 +58,7 @@ class Contact < ApplicationRecord
             contact.flight_detail.date_of_arrival,
             contact.flight_detail.flight_number,
             contact.flight_detail.arrival_airport,
-            contact.flight_detail.departure_country,
+            ISO3166::Country[contact.flight_detail.departure_country].try(:name),
             contact.flight_detail.profession,
             contact.flight_detail.is_health_worker,
             contact.flight_detail.connecting_flight_details
