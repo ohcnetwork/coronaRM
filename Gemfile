@@ -36,6 +36,8 @@ gem 'enum_help'
 gem 'devise'
 # User Ability
 gem 'cancancan'
+gem 'country_select', require: 'country_select_without_sort_alphabetical'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
