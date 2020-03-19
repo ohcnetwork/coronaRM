@@ -74,6 +74,5 @@ def populate_traveller_from_data_file
   end
 end
 
-User.create({email: "admin@gmail.com", password: "test123", password_confirmation: "test123", district_id: 11})
 create_districts
 populate_traveller_from_data_file()
