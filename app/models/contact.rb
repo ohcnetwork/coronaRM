@@ -1,5 +1,5 @@
 class Contact < ApplicationRecord
-  enum sex: {male: "male", female: "female"}
+  enum gender: {male: "male", female: "female"}
   enum risk: {high: "high", medium: "medium", low: "low"}
   enum tracking_type: {primary: "primary", secondary: "secondary", patient: "patient", flight_passenger: "flight_passenger"}
   enum isolation_type: {home_isolation: "home_isolation", isolation_ward: "isolation_ward", admitted: "admitted"}
