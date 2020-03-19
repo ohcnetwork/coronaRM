@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     get :generate_csv_report, on: :collection
     get :generate_csv_called_report, on: :collection
     get :generate_csv_report_travellers, on: :collection
+    get :generate_csv_medical_needs_report, on: :collection
   end
 
   resources :contacts, except: [:destroy] do
