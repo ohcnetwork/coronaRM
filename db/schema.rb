@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_19_020816) do
+ActiveRecord::Schema.define(version: 2020_03_19_033932) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,7 +67,6 @@ ActiveRecord::Schema.define(version: 2020_03_19_020816) do
     t.string "field_staff_phone"
     t.index ["district_id"], name: "index_contacts_on_district_id"
     t.index ["infector_id"], name: "index_contacts_on_infector_id"
-    t.index ["patient_id"], name: "index_contacts_on_patient_id", unique: true
   end
 
   create_table "districts", force: :cascade do |t|
