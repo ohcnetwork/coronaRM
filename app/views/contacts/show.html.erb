@@ -10,8 +10,8 @@
         </div>
         <div>
             <%= link_to 'Edit Contact', edit_contact_path(@contact), class: 'inline-flex items-center px-3 py-2 rounded-md text-sm font-medium leading-5 bg-gray-100 text-gray-800' %>
-            <%= link_to 'Not Reachable', call_not_reachable_contact_path(@contact, user_id: @current_user.id), class: 'inline-flex items-center px-3 py-2 rounded-md text-sm font-medium leading-5 bg-red-100 text-red-800' %>
-            <%= link_to 'Mark as Called', make_call_contact_path(@contact, user_id: @current_user.id), class: 'ml-2 inline-flex items-center px-3 py-2 text-sm rounded-md font-medium leading-5 bg-green-100 text-green-800' %>
+            <%= link_to 'Not Reachable', call_not_reachable_contact_path(@contact, user_id: @current_user.id), class: 'ml-4 inline-flex items-center px-3 py-2 rounded-md text-sm font-medium leading-5 bg-red-100 text-red-800' %>
+            <%= link_to 'Mark as Called', make_call_contact_path(@contact, user_id: @current_user.id), class: 'ml-1 inline-flex items-center px-3 py-2 text-sm rounded-md font-medium leading-5 bg-green-100 text-green-800' %>
         </div>
     </div>
     <div class="px-4 py-5 sm:p-0">
