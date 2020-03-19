@@ -16,6 +16,7 @@ class Contact < ApplicationRecord
   has_many :callees, through: :calls, source: :user
 
   belongs_to :district
+  has_one :flight_detail
 
   def self.to_csv
     attributes = %w{patient_id name tracking_type isolation_type risk non_medical_reqs non_medical_other medical_reqs medical_other previous_medical_conditions symptoms phone age gender house_name ward panchayath town district phc_name date_of_first_contact mode_of_contact infector infectees }
