@@ -74,6 +74,23 @@ class DashboardController < ApplicationController
     end
   end
 
+  def generate_symptomatic_today
+    today = Time.zone.now.beginning_of_day..Time.zone.now.end_of_day
+    contacted_today = Contact.joins(:calls, :symptoms).where(calls:{created_at: today}).where({symptoms: {created_at: today}}).distinct
+    respond_to do |format|
+      format.html
+      format.csv { send_data contacted_today.to_csv, filename: "users-#{Date.today}.csv" }
+    end
+  end
+
+  def generate_symptomatic
+    contacts = Contact.include(:symptoms).distinct
+    respond_to do |format|
+      format.html
+      format.csv { send_data contacts.to_csv, filename: "users-#{Date.today}.csv" }
+    end
+  end
+
   private
   def redirect_unless_admin
     unless current_user.try(:admin?)

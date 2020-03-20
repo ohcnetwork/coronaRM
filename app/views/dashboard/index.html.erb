@@ -108,18 +108,6 @@
                 <%= @number_of_flight_passengers_contacted_today %>
             </p>
         </div>
-        <div class="ml-4 bg-white inline-block px-5 py-4 rounded-md shadow-lg">
-            <h3 class="uppercase text-xs font-medium text-gray-600">Primary Contacts</h3>
-            <p class="text-3xl font-bold">
-                <%= @number_of_primary_contacted_today %>
-            </p>
-        </div>
-        <div class="ml-4 bg-white inline-block px-5 py-4 rounded-md shadow-lg">
-            <h3 class="uppercase text-xs font-medium text-gray-600">Secondary Contacts</h3>
-            <p class="text-3xl font-bold">
-                <%= @number_of_secondary_contacted_today %>
-            </p>
-        </div>
     </div>
     <div class="mt-4 flex">
     </div>
@@ -135,6 +123,18 @@
     </div>
     <div class="mt-4 flex">
         <%= link_to "Unreachable Contacts Today", not_reachable_report_today_dashboard_index_path(format: :csv) ,class: "inline-flex items-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-15" %>
+    </div>
+</section>
+
+<section class="mt-8">
+    <hr class="block py-4" />
+    <h2 class="font-bold font-xl">Symptomatics</h2>
+    <div class="mt-4 flex">
+        <%= link_to "Contacts Reporting Symptoms", generate_symptomatic_dashboard_index_path(format: :csv) ,class: "inline-flex items-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-15" %>
+    </div>
+    
+    <div class="mt-4 flex">
+    <%= link_to "Contacts Reporting Symptoms Today", generate_symptomatic_today_dashboard_index_path(format: :csv) ,class: "inline-flex items-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-15" %>
     </div>
 </section>
 

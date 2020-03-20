@@ -18,7 +18,7 @@ class ContactsController < ApplicationController
   # GET /contacts/1
   # GET /contacts/1.json
   def show
-    @related_contacts = Contact.where(phone: @contact.phone).where.not(id: @contact.id)
+    @related_contacts = Contact.where(phone: @contact.phone).where.not(id: @contact.id).where.not(phone: "")
     @last_call = @contact.calls.order("created_at").last
   end
 
