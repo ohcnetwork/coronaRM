@@ -18,6 +18,56 @@ class Contact < ApplicationRecord
   belongs_to :district
   has_one :flight_detail
 
+
+  def self.to_csv_header
+    attributes = %w{id patient_id name tracking_type isolation_type risk non_medical_reqs non_medical_other medical_reqs medical_other previous_medical_conditions symptoms phone age gender house_name ward panchayath town district phc_name date_of_first_contact mode_of_contact infector infectees date_of_arrival flight_number arrival_airport departure_country profession is_health_worker connecting_flight_details}
+    attributes
+  end
+
+  def to_csv_row
+        contact_row = [
+          id,
+          patient_id,
+          name,
+          tracking_type, 
+          isolation_type, 
+          risk,
+          non_medical_reqs.pluck(:requirement_type).join(', '),
+          non_med_other,
+          medical_reqs.pluck(:requirement_type).join(', '),
+          med_other,
+          previous_medical_conditions.pluck(:condition_type).join(', '),
+          symptoms.pluck(:symptom_type).join(', '),
+          phone,
+          age,
+          gender,
+          house_name,
+          ward,
+          panchayath,
+          town,
+          district.name,
+          phc_name,
+          date_of_first_contact,
+          mode_of_contact,
+          infector.try!(:name),
+          infectees.pluck(:name).join(', '),
+        ]
+
+        if tracking_type == "flight_passenger" and flight_detail
+          contact_row = contact_row + [
+            flight_detail.date_of_arrival,
+            flight_detail.flight_number,
+            flight_detail.arrival_airport,
+            ISO3166::Country[flight_detail.departure_country].try(:name),
+            flight_detail.profession,
+            flight_detail.is_health_worker,
+            flight_detail.connecting_flight_details
+          ]
+        end
+
+        contact_row
+  end
+
   def self.to_csv
     attributes = %w{id patient_id name tracking_type isolation_type risk non_medical_reqs non_medical_other medical_reqs medical_other previous_medical_conditions symptoms phone age gender house_name ward panchayath town district phc_name date_of_first_contact mode_of_contact infector infectees date_of_arrival flight_number arrival_airport departure_country profession is_health_worker connecting_flight_details}
 

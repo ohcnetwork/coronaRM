@@ -24,9 +24,10 @@ class DashboardController < ApplicationController
     @contacts = Contact.all()
     respond_to do |format|
       format.html
-      format.csv { send_data @contacts.to_csv, filename: "users-#{Date.today}.csv" }
+      format.csv {download_csv(@contacts)}
     end
   end
+
 
   def report_travellers
     @contacts = Contact.where(tracking_type: "flight_passenger")
@@ -110,6 +111,40 @@ class DashboardController < ApplicationController
     unless current_user.try(:admin?)
       flash[:alert] = "Access Denied! Only Admins are Allowed Access"
       redirect_to root_path
+    end
+  end
+
+  def download_csv(records)
+    filename = "contacts-#{Date.today}.csv"
+    # Tell Rack to stream the content
+    headers.delete("Content-Length")
+
+    # Don't cache anything from this generated endpoint
+    headers["Cache-Control"] = "no-cache"
+
+    # Tell the browser this is a CSV file
+    headers["Content-Type"] = "text/csv"
+
+    # Make the file download with a specific filename
+    headers["Content-Disposition"] = "attachment; filename=#{filename}"
+
+    # Don't buffer when going through proxy servers
+    headers["X-Accel-Buffering"] = "no"
+
+    # Set an Enumerator as the body
+    self.response_body = resp_body(records)
+
+    # Set the status to success
+    response.status = 200
+
+  end
+
+  def resp_body(records)
+    Enumerator.new do |yielder|
+      yielder << Contact.to_csv_header.to_csv
+      records.each do |record|
+        yielder << record.to_csv_row.to_csv
+      end
     end
   end
 end
