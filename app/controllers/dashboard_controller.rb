@@ -74,6 +74,15 @@ class DashboardController < ApplicationController
     end
   end
 
+  def contacts_contacted
+    contacts = Contact.joins(:calls).where(['calls.not_reachable is null or calls.not_reachable = ?', false]).distinct
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data contacts.to_csv, filename: "users-#{Date.today}.csv" }
+    end
+  end
+
   def generate_symptomatic_today
     today = Time.zone.now.beginning_of_day..Time.zone.now.end_of_day
     contacted_today = Contact.joins(:calls, :symptoms).where(calls:{created_at: today}).where({symptoms: {created_at: today}}).distinct
@@ -84,7 +93,7 @@ class DashboardController < ApplicationController
   end
 
   def generate_symptomatic
-    contacts = Contact.include(:symptoms).distinct
+    contacts = Contact.joins(:symptoms).distinct
     respond_to do |format|
       format.html
       format.csv { send_data contacts.to_csv, filename: "users-#{Date.today}.csv" }
