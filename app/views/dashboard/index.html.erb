@@ -102,10 +102,22 @@
                 <%= @number_of_health_workers_flight_passengers %>
             </p>
         </div>
-        <div class="ml-4 bg-white inline-block px-5 py-4 rounded-md shadow-lg">
-            <h3 class="uppercase text-xs font-medium text-gray-600">Flight Passengers</h3>
+</section>
+<section class="mt-8">
+    <hr class="block py-4" />
+    <h2 class="font-bold font-xl">Symptomatics</h2>
+    <div class="mt-2 flex">
+        <div class="bg-white inline-block px-5 py-4 rounded-md shadow-lg">
+            <h3 class="uppercase text-xs font-medium text-gray-600">Number of Symptomatics</h3>
             <p class="text-3xl font-bold">
-                <%= @number_of_flight_passengers_contacted_today %>
+                <%= @number_of_symptomatics %>
+
+            </p>
+        </div>
+        <div class="ml-4 bg-white inline-block px-5 py-4 rounded-md shadow-lg">
+            <h3 class="uppercase text-xs font-medium text-gray-600">Number of Symptomatics Today</h3>
+            <p class="text-3xl font-bold">
+                <%= @number_of_symptomatics_today  %>
             </p>
         </div>
     </div>
