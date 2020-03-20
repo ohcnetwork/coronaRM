@@ -80,7 +80,7 @@ class DashboardController < ApplicationController
   end
 
   def contacts_contacted
-     contacts = Contact.joins(:calls).where.not(calls: {not_reachable: true}).distinct
+     contacts = Contact.joins(:calls).where(calls: {not_reachable: nil}).distinct
 
     respond_to do |format|
       format.html
@@ -90,7 +90,7 @@ class DashboardController < ApplicationController
 
   def generate_symptomatic_today
     today = Time.zone.now.beginning_of_day..Time.zone.now.end_of_day
-    contacted_today = Contact.joins(:calls, :symptoms).where(calls:{created_at: today}).where({symptoms: {created_at: today}}).distinct
+    contacted_today = Contact.joins(:calls, :symptoms).where(calls:{created_at: today}).where({symptoms: {created_at: today}}).where.not(symptoms: {symptom_type: ""}).distinct
     respond_to do |format|
       format.html
       format.csv { send_data contacted_today.to_csv, filename: "users-#{Date.today}.csv" }
@@ -98,7 +98,7 @@ class DashboardController < ApplicationController
   end
 
   def generate_symptomatic
-    contacts = Contact.joins(:symptoms).where.not(symptoms: nil).distinct
+    contacts = Contact.joins(:symptoms).where.not(symptoms: {symptom_type: ""}).distinct
     respond_to do |format|
       format.html
       format.csv { send_data contacts.to_csv, filename: "users-#{Date.today}.csv" }
