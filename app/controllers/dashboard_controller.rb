@@ -84,7 +84,7 @@ class DashboardController < ApplicationController
   end
 
   def generate_symptomatic
-    contacts = Contact.joins(:symptoms).distinct
+    contacts = Contact.include(:symptoms).distinct
     respond_to do |format|
       format.html
       format.csv { send_data contacts.to_csv, filename: "users-#{Date.today}.csv" }
