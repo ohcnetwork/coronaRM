@@ -75,7 +75,7 @@ class DashboardController < ApplicationController
   end
 
   def contacts_contacted
-    contacts = Contact.joins(:calls).where(['calls.not_reachable is null or calls.not_reachable = ?', false]).distinct
+     contacts = Contact.joins(:calls).where.not(calls: {not_reachable: true}).distinct
 
     respond_to do |format|
       format.html
@@ -93,7 +93,7 @@ class DashboardController < ApplicationController
   end
 
   def generate_symptomatic
-    contacts = Contact.joins(:symptoms).distinct
+    contacts = Contact.joins(:symptoms).where.not(symptoms: nil).distinct
     respond_to do |format|
       format.html
       format.csv { send_data contacts.to_csv, filename: "users-#{Date.today}.csv" }
