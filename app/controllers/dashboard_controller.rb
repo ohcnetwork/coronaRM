@@ -18,6 +18,7 @@ class DashboardController < ApplicationController
     today = Time.zone.now.beginning_of_day..Time.zone.now.end_of_day
     @number_of_symptomatics_today = Contact.joins(:calls, :symptoms).where(calls:{created_at: today}).where({symptoms: {created_at: today}}).where.not(symptoms: {symptom_type: ""}).distinct.count
     @number_of_symptomatics = Contact.joins(:symptoms).where.not(symptoms: nil).where.not(symptoms: {symptom_type: ""}).distinct.count
+    @number_of_non_contacted_ever = @contacts_count - Contact.joins(:calls).distinct.count
   end
 
   def csv_report
