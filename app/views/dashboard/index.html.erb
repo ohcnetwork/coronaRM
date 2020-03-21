@@ -167,6 +167,18 @@
 
 <section class="mt-8">
     <hr class="block py-4" />
+    <h2 class="font-bold font-xl">Requirements</h2>
+    <div class="mt-4 flex">
+        <%= link_to "Medical Requirements", generate_medical_reqs_dashboard_index_path(format: :csv) ,class: "inline-flex items-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-15" %>
+    </div>
+
+    <div class="mt-4 flex">
+        <%= link_to "Non Medical Requirements", generate_non_medical_reqs_dashboard_index_path(format: :csv) ,class: "inline-flex items-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-15" %>
+    </div>
+</section>
+
+<section class="mt-8">
+    <hr class="block py-4" />
     <h2 class="font-bold font-xl">Flight Passenger Reports</h2>
     <div class="mt-4 flex">
         <%= link_to "Full Report of Travellers", report_travellers_dashboard_index_path(format: :csv) ,class: "inline-flex items-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-15" %>
