@@ -1,31 +1,41 @@
 <h1 class="text-2xl font-bold">Dashboard</h1>
 
-<section class="mt-8 flex">
-    <div class="bg-white inline-block px-5 py-4 rounded-md shadow-lg">
-        <div>
-            <h3 class="uppercase text-xs font-medium text-gray-600">Total Contacts</h3>
+<section class="mt-8">
+    <div class="mt-2 flex">
+        <div class="bg-white inline-block px-5 py-4 rounded-md shadow-lg">
+            <div>
+                <h3 class="uppercase text-xs font-medium text-gray-600">Total Contacts</h3>
+                <p class="text-3xl font-bold">
+                    <%= @contacts_count %>
+                </p>
+            </div>
+        </div>
+        <div class="ml-4 bg-white inline-block px-5 py-4 rounded-md shadow-lg">
+            <h3 class="uppercase text-xs font-medium text-gray-600">Flight Passengers</h3>
             <p class="text-3xl font-bold">
-                <%= @contacts_count %>
+                <%= @flight_passengers_contacts_count %>
+            </p>
+        </div>
+        <div class="ml-4 bg-white inline-block px-5 py-4 rounded-md shadow-lg">
+            <h3 class="uppercase text-xs font-medium text-gray-600">Primary Contacts</h3>
+            <p class="text-3xl font-bold">
+                <%= @primary_contacts_count %>
+            </p>
+        </div>
+        <div class="ml-4 bg-white inline-block px-5 py-4 rounded-md shadow-lg">
+            <h3 class="uppercase text-xs font-medium text-gray-600">Secondary Contacts</h3>
+            <p class="text-3xl font-bold">
+                <%= @secondary_contacts_count %>
             </p>
         </div>
     </div>
-    <div class="ml-4 bg-white inline-block px-5 py-4 rounded-md shadow-lg">
-        <h3 class="uppercase text-xs font-medium text-gray-600">Flight Passengers</h3>
-        <p class="text-3xl font-bold">
-            <%= @flight_passengers_contacts_count %>
-        </p>
-    </div>
-    <div class="ml-4 bg-white inline-block px-5 py-4 rounded-md shadow-lg">
-        <h3 class="uppercase text-xs font-medium text-gray-600">Primary Contacts</h3>
-        <p class="text-3xl font-bold">
-            <%= @primary_contacts_count %>
-        </p>
-    </div>
-    <div class="ml-4 bg-white inline-block px-5 py-4 rounded-md shadow-lg">
-        <h3 class="uppercase text-xs font-medium text-gray-600">Secondary Contacts</h3>
-        <p class="text-3xl font-bold">
-            <%= @secondary_contacts_count %>
-        </p>
+    <div class="mt-4 flex">
+        <div class="bg-white inline-block px-5 py-4 rounded-md shadow-lg">
+            <h3 class="uppercase text-xs font-medium text-gray-600">Non Contacted Ever</h3>
+            <p class="text-3xl font-bold">
+                <%= @number_of_non_contacted_ever %>
+            </p>
+        </div>
     </div>
 </section>
 
@@ -133,11 +143,13 @@
     <div class="mt-4 flex">
         <%= link_to "Reachable Contacts", contacts_contacted_dashboard_index_path(format: :csv) ,class: "inline-flex items-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-15" %>
     </div>
-    <div class="mt-4 flex">
-        <%= link_to "Contacts Called Today", called_report_today_dashboard_index_path(format: :csv) ,class: "inline-flex items-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-15" %>
-    </div>
-    <div class="mt-4 flex">
-        <%= link_to "Unreachable Contacts Today", not_reachable_report_today_dashboard_index_path(format: :csv) ,class: "inline-flex items-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-15" %>
+    <div class="mt-8">
+        <div class="mt-4 flex">
+            <%= link_to "Contacts Called Today", called_report_today_dashboard_index_path(format: :csv) ,class: "inline-flex items-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-15" %>
+        </div>
+        <div class="mt-4 flex">
+            <%= link_to "Unreachable Contacts Today", not_reachable_report_today_dashboard_index_path(format: :csv) ,class: "inline-flex items-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-15" %>
+        </div>
     </div>
 </section>
 
@@ -147,9 +159,21 @@
     <div class="mt-4 flex">
         <%= link_to "Contacts Reporting Symptoms", generate_symptomatic_dashboard_index_path(format: :csv) ,class: "inline-flex items-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-15" %>
     </div>
-    
+
     <div class="mt-4 flex">
-    <%= link_to "Contacts Reporting Symptoms Today", generate_symptomatic_today_dashboard_index_path(format: :csv) ,class: "inline-flex items-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-15" %>
+        <%= link_to "Contacts Reporting Symptoms Today", generate_symptomatic_today_dashboard_index_path(format: :csv) ,class: "inline-flex items-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-15" %>
+    </div>
+</section>
+
+<section class="mt-8">
+    <hr class="block py-4" />
+    <h2 class="font-bold font-xl">Requirements</h2>
+    <div class="mt-4 flex">
+        <%= link_to "Medical Requirements", generate_medical_reqs_dashboard_index_path(format: :csv) ,class: "inline-flex items-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-15" %>
+    </div>
+
+    <div class="mt-4 flex">
+        <%= link_to "Non Medical Requirements", generate_non_medical_reqs_dashboard_index_path(format: :csv) ,class: "inline-flex items-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-15" %>
     </div>
 </section>
 
