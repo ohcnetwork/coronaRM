@@ -122,6 +122,14 @@ class DashboardController < ApplicationController
     end
   end
 
+  def generate_not_called_yet
+    contacts = Contact.left_outer_joins(:calls).where(calls: {id: nil})
+    respond_to do |format|
+      format.html
+      format.csv { send_data contacts.to_csv, filename: "users-#{Date.today}.csv" }
+    end
+  end
+
   private
   def redirect_unless_admin
     unless current_user.try(:admin?)
