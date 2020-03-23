@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_19_072336) do
+ActiveRecord::Schema.define(version: 2020_03_23_022409) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,6 +86,7 @@ ActiveRecord::Schema.define(version: 2020_03_19_072336) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "is_health_worker"
+    t.boolean "is_notified_country"
     t.index ["contact_id"], name: "index_flight_details_on_contact_id"
   end
 

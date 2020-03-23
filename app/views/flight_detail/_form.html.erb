@@ -1,11 +1,12 @@
-<%= simple_form_for [@contact, @contact.flight_detail || @contact.build_flight_detail], defaults: { input_html: {class: 'form-input mt-1'}, wrapper_html: {class: 'flex flex-col my-2 max-w-md'}}, data: { 'turbolinks-scroll': false } do |f| %>
+<%= simple_form_for [@contact, @contact.flight_detail || @contact.build_flight_detail], defaults: { input_html: {class: 'form-input mt-1'}, wrapper_html: {class: 'flex flex-col my-4 max-w-md'}}, data: { 'turbolinks-scroll': false } do |f| %>
 <%= f.input :date_of_arrival, as: :date, input_html: {class: 'form-select p-2 border'} %>
 <div class="mt-4">
     <hr class="pb-2" />
     <%= f.input :flight_number %>
     <%= f.input :arrival_airport %>
     <%= f.input :departure_country, input_html: {class: 'form-select', id: 'dropdown-choice-select'} %>
-    <%= f.input :connecting_flight_details%>
+    <%= f.input :is_notified_country, label: "Is Notified Country ?",input_html: {class: 'mr-2 form-checkbox p-2'}, wrapper_html: {class: 'my-3 mb-6'}%>
+    <%= f.input :connecting_flight_details %>
 </div>
 <div class="mt-4">
     <hr class="pb-2" />
