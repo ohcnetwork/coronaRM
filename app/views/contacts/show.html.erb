@@ -47,17 +47,18 @@
             </div>
             <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:px-6 sm:py-5">
                 <dt class="text-sm leading-5 font-medium text-gray-500">
-                    Days in Quarentine
+                    Days to Exit from Quarantine
                 </dt>
                 <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
                     <% if @contact.try(:flight_passenger?) && @contact.flight_detail.try(:date_of_arrival) %>
-                    <%= time_ago_in_words(@contact.flight_detail.date_of_arrival) %>
+                        <% @day_to_exit_from_quarantine = @contact.flight_detail.date_of_arrival + (@contact.flight_detail.is_notified_country ? 28.days : 14.days) %>
+                        <%= distance_of_time_in_words(Time.now, @day_to_exit_from_quarantine)%>, on <span class="font-bold"><%= @day_to_exit_from_quarantine.to_s(:long) %></span>
                     <% else %>
-                    <% if @contact.date_of_first_contact %>
-                    <%= time_ago_in_words(@contact.date_of_first_contact) %>
-                    <% else %>
-                    Unknown
-                    <% end %>
+                        <% if @contact.date_of_first_contact %>
+                            <%= distance_of_time_in_words(Time.now, @contact.date_of_first_contact + 28.days) %>
+                        <% else %>
+                            Unknown
+                        <% end %>
                     <% end %>
                 </dd>
             </div>

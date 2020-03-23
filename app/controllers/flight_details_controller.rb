@@ -32,6 +32,6 @@ class FlightDetailsController < ApplicationController
   private
 
   def flight_detail_params
-    params[:flight_detail].permit(:date_of_arrival, :flight_number, :arrival_airport, :departure_country, :profession, :connecting_flight_details, :is_health_worker)
+    params[:flight_detail].permit(:date_of_arrival, :flight_number, :arrival_airport, :departure_country, :profession, :connecting_flight_details, :is_health_worker, :is_notified_country)
   end
 end
