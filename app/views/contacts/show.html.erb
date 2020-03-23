@@ -26,7 +26,7 @@
                     </p>
                     <div>
                         <p class="inline-block items-center px-2.5 py-0.5 rounded-md text-sm font-medium leading-5 bg-blue-100 text-blue-800">
-                            <%= @contact.patient_id %>
+                            <%= @contact.id %>
                         </p>
                     </div>
                 </dd>
@@ -274,7 +274,7 @@
                 </dt>
                 <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
                     <%= simple_form_for @contact, defaults: { input_html: {class: 'form-input mt-1 font-sans'}, wrapper_html: {class: 'flex flex-col my-4'}, label_html: {class: 'mb-1'}} do |f|%>
-                    <%= f.input :did_meet_suspected_patient , label: "Did Meet Suspected Patient ?",input_html: {class: 'mr-2 form-checkbox p-2'}, wrapper_html: {class: 'my-3 mb-6'}%>
+                    <%= f.input :did_meet_suspected_patient , label: "Did Meet Suspected Patient ?",input_html: {class: 'mr-2 form-checkbox p-2'}, wrapper_html: {class: 'my-3'}%>
                     <%= f.input :med_other, label: 'Other Medical Needs' %>
                     <%= f.input :non_med_other, label: 'Other Non Medical Needs' %>
                     <div class="mt-4">
@@ -312,7 +312,7 @@
                                     <%= link_to 'Mark as Called', make_related_call_contact_path(related_contact_id: related_contact.id, user_id: @current_user.id, parent_id: @contact.id), class: 'inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium leading-5 bg-red-100 text-red-800' %>
                                 </div>
                                 <div class="ml-2 flex-shrink-0">
-                                    <%= link_to related_contact.patient_id, related_contact, class: 'inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium leading-5 bg-purple-100 text-purple-800' %>
+                                    <%= link_to related_contact.id, related_contact, class: 'inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium leading-5 bg-purple-100 text-purple-800' %>
                                 </div>
                             </div>
                         </li>
