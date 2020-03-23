@@ -32,3 +32,7 @@ yarn-debug.log*
 
 # Do not checkin data
 /data/*
+
+.generators
+.rakeTasks
+
