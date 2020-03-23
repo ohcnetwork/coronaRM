@@ -30,8 +30,16 @@ $ bundle install
 ### Setting up the database
 ```
 $ rake db:create
-$ rake db:schema:load
+$ rake db:setup
 ```
+
+### Creating admin users
+
+```
+$ rake create_user:admin['user@example.com', 'password'] 
+```
+
+this will create a new user with email address as `user@example.com` with password `password`
 
 this will create both the development and testing database.
 
