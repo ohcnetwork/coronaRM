@@ -62,7 +62,15 @@
                     <% end %>
                     <% else %>
                     <% if @contact.date_of_first_contact %>
-                    <%= distance_of_time_in_words(Time.now, @contact.date_of_first_contact + 28.days) %>
+                        <% @day_to_exit_from_quarantine_primary = @contact.date_of_first_contact + 28.days %>
+                        <% if @day_to_exit_from_quarantine_primary > Date.today %>
+                            <%= distance_of_time_in_words(Time.now, @day_to_exit_from_quarantine_primary) %>
+                        <% else %>
+                            <p class="font-bold">
+                                Out of Quarantine
+                            </p>
+
+                        <% end %>
                     <% else %>
                     Unknown
                     <% end %>
