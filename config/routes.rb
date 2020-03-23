@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     get :medical_needs_report_today, on: :collection
     get :non_medical_needs_report_today, on: :collection
     get :health_care_workers, on: :collection
+    get :health_care_workers_today, on: :collection
     get :generate_symptomatic, on: :collection
     get :generate_symptomatic_today, on: :collection
     get :generate_medical_reqs, on: :collection

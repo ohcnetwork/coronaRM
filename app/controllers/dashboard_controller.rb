@@ -80,6 +80,16 @@ class DashboardController < ApplicationController
     end
   end
 
+  def health_care_workers_today
+    today = Time.zone.now.beginning_of_day..Time.zone.now.end_of_day
+    contacts = Contact.joins(:calls).where(calls: {created_at: today}).left_outer_joins(:flight_detail).where(tracking_type: :flight_passenger, flight_details: {is_health_worker: true}).distinct
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data contacts.to_csv, filename: "users-#{Date.today}.csv" }
+    end
+  end
+
   def contacts_contacted
      contacts = Contact.joins(:calls).where(calls: {not_reachable: nil}).distinct
 
