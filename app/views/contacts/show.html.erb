@@ -152,14 +152,14 @@
             </div>
             <% end %>
             <% if @contact.try(:domestic_passenger?) %>
-                <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:px-6 sm:py-5">
-                    <dt class="text-sm leading-5 font-medium text-gray-500">
-                        Domestic Travel Detail
-                    </dt>
-                    <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-                        <%= render 'domestic_details/form' %>
-                    </dd>
-                </div>
+            <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:px-6 sm:py-5">
+                <dt class="text-sm leading-5 font-medium text-gray-500">
+                    Domestic Travel Detail
+                </dt>
+                <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
+                    <%= render 'domestic_details/form' %>
+                </dd>
+            </div>
             <% end %>
             <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:px-6 sm:py-5">
                 <dt class="text-sm leading-5 font-medium text-gray-500">
@@ -288,18 +288,21 @@
                 <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
                     <%= simple_form_for @contact, defaults: { input_html: {class: 'form-input mt-1 font-sans'}, wrapper_html: {class: 'flex flex-col my-4'}, label_html: {class: 'mb-1'}} do |f|%>
                     <%= f.input :did_meet_suspected_patient , label: "Did Meet Suspected Patient ?",input_html: {class: 'mr-2 form-checkbox p-2'}, wrapper_html: {class: 'my-3'}%>
-                    <%= f.input :med_other, label: 'Other Medical Needs' %>
-                    <%= f.input :non_med_other, label: 'Other Non Medical Needs' %>
+                    <div class="mt-4">
+                        <hr class="pb-2" />
+                        <%= f.input :profession, label: 'Profession' %>
+                        <%= f.input :is_health_worker, label: "Is Health Worker ?",input_html: {class: 'mr-2 form-checkbox px-2'} %>
+                    </div>
+                    <div class="mt-4">
+                        <hr class="pb-2" />
+                        <%= f.input :med_other, label: 'Other Medical Needs' %>
+                        <%= f.input :non_med_other, label: 'Other Non Medical Needs' %>
+                    </div>
                     <div class="mt-4">
                         <hr class="pb-2" />
 
                         <%= f.input :is_non_med_req_met, label: 'Are Non-Medical needs met ?', input_html: {class: 'mr-1 form-checkbox p-2'} , wrapper_html: {class: 'mt-2 my-1'}%>
                         <%= f.input :is_med_req_met, label: 'Are Medical needs met ? ', input_html: {class: 'mr-1 form-checkbox p-2'}, wrapper_html: {class: 'my-1'} %>
-                    </div>
-                    <div class="mt-4">
-                        <hr class="pb-2" />
-                        <%= f.input :profession, label: 'Profession' %>
-                        <%= f.input :is_health_worker, label: "Is Health Worker ?",input_html: {class: 'mr-2 form-checkbox px-2'} %>
                     </div>
                     <div class="pt-8">
                         <%= f.input :comment, label: 'Feedback Comments if Any' %>
