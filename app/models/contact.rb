@@ -18,6 +18,7 @@ class Contact < ApplicationRecord
 
   belongs_to :district
   has_one :flight_detail
+  has_one :domestic_detail
 
   def self.to_csv
     attributes = %w{id patient_id name tracking_type passenger_type isolation_type risk did_meet_suspected_patient non_medical_reqs non_medical_other medical_reqs medical_other previous_medical_conditions symptoms feedback_comment phone age gender house_name ward panchayath town district phc_name date_of_first_contact mode_of_contact infector infectees date_of_arrival flight_number arrival_airport departure_country is_notified_country profession is_health_worker connecting_flight_details}

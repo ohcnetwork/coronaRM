@@ -38,5 +38,7 @@ Rails.application.routes.draw do
     end
     resources :flight_details do
     end
+    resources :domestic_details do
+    end
   end
 end
