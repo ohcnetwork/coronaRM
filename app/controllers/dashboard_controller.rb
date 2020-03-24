@@ -30,7 +30,7 @@ class DashboardController < ApplicationController
   end
 
   def report_travellers
-    @contacts = Contact.where(passenger_type: :flight_passenger)
+    @contacts = Contact.where.not(passenger_type: [nil, ""])
     respond_to do |format|
       format.html
       format.csv { send_data @contacts.to_csv, filename: "users-#{Date.today}.csv" }
