@@ -296,6 +296,12 @@
                         <%= f.input :is_non_med_req_met, label: 'Are Non-Medical needs met ?', input_html: {class: 'mr-1 form-checkbox p-2'} , wrapper_html: {class: 'mt-2 my-1'}%>
                         <%= f.input :is_med_req_met, label: 'Are Medical needs met ? ', input_html: {class: 'mr-1 form-checkbox p-2'}, wrapper_html: {class: 'my-1'} %>
                     </div>
+                    <div class="mt-4">
+                        <hr class="pb-2" />
+
+                        <%= f.input :profession, label: 'Profession' %>
+                        <%= f.input :is_health_worker, label: "Did Meet Suspected Patient ?",input_html: {class: 'mr-2 form-checkbox p-2'}, wrapper_html: {class: 'my-3'}%>
+                    </div>
                     <div class="pt-8">
                         <%= f.input :comment, label: 'Feedback Comments if Any' %>
                         <%= f.button :submit, 'Save', class: 'inline-flex items-center px-3 py-3 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150' %>
