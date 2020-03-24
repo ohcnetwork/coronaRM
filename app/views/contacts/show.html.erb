@@ -10,8 +10,8 @@
         </div>
         <div>
             <%= link_to 'Edit Contact', edit_contact_path(@contact), class: 'inline-flex items-center px-3 py-2 rounded-md text-sm font-medium leading-5 bg-gray-100 text-gray-800' %>
-            <%= link_to 'Not Reachable', call_not_reachable_contact_path(@contact, user_id: @current_user.id), class: 'ml-4 inline-flex items-center px-3 py-2 rounded-md text-sm font-medium leading-5 bg-red-100 text-red-800' %>
-            <%= link_to 'Mark as Called', make_call_contact_path(@contact, user_id: @current_user.id), class: 'ml-1 inline-flex items-center px-3 py-2 text-sm rounded-md font-medium leading-5 bg-green-100 text-green-800' %>
+            <%= link_to 'Not Reachable', call_not_reachable_contact_path(@contact, user_id: @current_user.id), class: 'ml-0 lg:mt-4 inline-flex items-center px-3 py-2 rounded-md text-sm font-medium leading-5 bg-red-100 text-red-800' %>
+            <%= link_to 'Mark as Called', make_call_contact_path(@contact, user_id: @current_user.id), class: 'lg:ml-1 inline-flex items-center px-3 py-2 text-sm rounded-md font-medium leading-5 bg-green-100 text-green-800' %>
         </div>
     </div>
     <div class="px-4 py-5 sm:p-0">
@@ -37,11 +37,11 @@
                 </dt>
                 <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
                     <% if @contact.tracking_type.present? %>
-                        <%= content_tag :span, @contact.tracking_type.to_s.capitalize + ' Contact' ,class: "px-2 inline-flex text-xs leading-5 font-semibold rounded-full text-gray-600 #{["patient", "primary"].include?(@contact.tracking_type.to_s) ? 'bg-red-100 text-red-800' : 'bg-gray-200'}" %>
+                    <%= content_tag :span, @contact.tracking_type.to_s.capitalize + ' Contact' ,class: "px-2 inline-flex text-xs leading-5 font-semibold rounded-full text-gray-600 #{["patient", "primary"].include?(@contact.tracking_type.to_s) ? 'bg-red-100 text-red-800' : 'bg-gray-200'}" %>
                     <% end %>
                     <% if @contact.passenger_type.present? %>
                     <%= content_tag :span, @contact.passenger_type.to_s.split("_").join(" ").titleize ,class: "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold leading-4 bg-yellow-100 text-yellow-800" %>
-                        <% end %>
+                    <% end %>
                     <% if @contact.risk.present? %>
                     <%= content_tag :span, @contact.risk.to_s.capitalize + ' Risk' ,class: "ml-1 px-2 inline-flex text-xs leading-5 font-semibold rounded-full text-gray-600 #{@contact.risk.to_s == "high" ? 'bg-red-100 text-red-800' : 'bg-gray-200'}" %>
                     <% end %>
@@ -65,15 +65,15 @@
                     <% end %>
                     <% else %>
                     <% if @contact.date_of_first_contact %>
-                        <% @day_to_exit_from_quarantine_primary = @contact.date_of_first_contact + 28.days %>
-                        <% if @day_to_exit_from_quarantine_primary > Date.today %>
-                            <%= distance_of_time_in_words(Time.now, @day_to_exit_from_quarantine_primary) %>
-                        <% else %>
-                            <p class="font-bold">
-                                Out of Quarantine
-                            </p>
+                    <% @day_to_exit_from_quarantine_primary = @contact.date_of_first_contact + 28.days %>
+                    <% if @day_to_exit_from_quarantine_primary > Date.today %>
+                    <%= distance_of_time_in_words(Time.now, @day_to_exit_from_quarantine_primary) %>
+                    <% else %>
+                    <p class="font-bold">
+                        Out of Quarantine
+                    </p>
 
-                        <% end %>
+                    <% end %>
                     <% else %>
                     Unknown
                     <% end %>
