@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_23_065423) do
+ActiveRecord::Schema.define(version: 2020_03_24_051419) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(version: 2020_03_23_065423) do
     t.string "field_staff_name"
     t.string "field_staff_phone"
     t.boolean "did_meet_suspected_patient"
+    t.string "passenger_type"
     t.index ["district_id"], name: "index_contacts_on_district_id"
     t.index ["infector_id"], name: "index_contacts_on_infector_id"
   end

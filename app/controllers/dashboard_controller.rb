@@ -3,16 +3,16 @@ class DashboardController < ApplicationController
 
   def index
     @contacts_count = Contact.all.count()
-    @flight_passengers_contacts_count  = Contact.where(tracking_type: :flight_passenger).count
+    @flight_passengers_contacts_count  = Contact.where(passenger_type: :flight_passenger).count
     @primary_contacts_count  = Contact.where(tracking_type: :primary).count
     @secondary_contacts_count  = Contact.where(tracking_type: :secondary).count
 
     @number_of_contacts_contacted_today = Contact.joins(:calls).where(calls:{created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day}).distinct.count
     @number_of_unreachable_contacts_contacted_today = Contact.joins(:calls).where(calls:{created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day, not_reachable: true}).distinct.count
-    @number_of_flight_passengers_contacted_today = Contact.joins(:calls).where(tracking_type: :flight_passenger,calls:{created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day}).distinct.count
+    @number_of_flight_passengers_contacted_today = Contact.joins(:calls).where(passenger_type: :flight_passenger,calls:{created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day}).distinct.count
     @number_of_primary_contacted_today = Contact.joins(:calls).where(tracking_type: :primary,calls:{created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day}).distinct.count
     @number_of_secondary_contacted_today = Contact.joins(:calls).where(tracking_type: :secondary, calls:{created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day}).distinct.count
-    @number_of_health_workers_flight_passengers = Contact.left_outer_joins(:flight_detail).where(tracking_type: :flight_passenger, flight_details: {is_health_worker: true}).distinct.count
+    @number_of_health_workers_flight_passengers = Contact.left_outer_joins(:flight_detail).where(passenger_type: :flight_passenger, flight_details: {is_health_worker: true}).distinct.count
 
 
     today = Time.zone.now.beginning_of_day..Time.zone.now.end_of_day
@@ -30,7 +30,7 @@ class DashboardController < ApplicationController
   end
 
   def report_travellers
-    @contacts = Contact.where(tracking_type: "flight_passenger")
+    @contacts = Contact.where(passenger_type: :flight_passenger)
     respond_to do |format|
       format.html
       format.csv { send_data @contacts.to_csv, filename: "users-#{Date.today}.csv" }
@@ -72,7 +72,7 @@ class DashboardController < ApplicationController
   end
 
   def health_care_workers
-    contacts = Contact.left_outer_joins(:flight_detail).where(tracking_type: :flight_passenger, flight_details: {is_health_worker: true}).distinct
+    contacts = Contact.left_outer_joins(:flight_detail).where(passenger_type: :flight_passenger, flight_details: {is_health_worker: true}).distinct
 
     respond_to do |format|
       format.html
@@ -82,7 +82,7 @@ class DashboardController < ApplicationController
 
   def health_care_workers_today
     today = Time.zone.now.beginning_of_day..Time.zone.now.end_of_day
-    contacts = Contact.joins(:calls).where(calls: {created_at: today}).left_outer_joins(:flight_detail).where(tracking_type: :flight_passenger, flight_details: {is_health_worker: true}).distinct
+    contacts = Contact.joins(:calls).where(calls: {created_at: today}).left_outer_joins(:flight_detail).where(passenger_type: :flight_passenger, flight_details: {is_health_worker: true}).distinct
 
     respond_to do |format|
       format.html

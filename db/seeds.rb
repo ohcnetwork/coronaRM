@@ -48,27 +48,18 @@ end
 
 
 def populate_traveller_from_data_file
-  CSV.foreach(Rails.root.join('data/traveller_2.csv'), headers: true) do |row|
+  CSV.foreach(Rails.root.join('data/import_data_3.csv'), headers: true) do |row|
     contact = Contact.create({
                      name: row[0],
-                     age: row[1],
-                     gender: row[2] ? (row[2].first.downcase == 'm' ? :male : :female):  nil,
-                     phone: row[3],
-                     house_name: row[4],
-                     ward: row[5],
-                     panchayath: row[6],
-                     phc_name: row[7],
-                     field_staff_name: row[8],
-                     field_staff_phone: row[9],
-                     isolation_type: row[10] ? ((row[10].first.downcase == 'y' or row[10].first.downcase == 'h') ? :home_isolation : nil) : nil,
+                     phone: row[1],
+                     house_name: row[2],
+                     ward: row[3],
+                     panchayath: row[4],
+                     isolation_type: "home_isolation",
                      tracking_type: "flight_passenger",
                      district_id: District.find_by(name: "Pathanamthitta").id
                    })
     flight = contact.build_flight_detail({
-                                           date_of_arrival: valid_date_or_empty_string(row[11] ? row[11] : "", "%d/%m/%Y") || valid_date_or_empty_string(row[11] ? row[11] : "", "%d.%m.%Y"),
-                                           flight_number: row[12],
-                                           arrival_airport: row[13],
-                                           connecting_flight_details: row[14],
                                          })
     flight.save!
   end

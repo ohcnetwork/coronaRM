@@ -12,6 +12,7 @@
     <div class="">
         <hr class="pb-4" />
         <%= f.input :tracking_type, input_html: {class: 'form-select'}%>
+        <%= f.input :passenger_type, input_html: {class: 'form-select'}%>
         <%= f.input :isolation_type, input_html: {class: 'form-select'}%>
         <!-- 
         <%= f.association :infector, collection: Contact.where.not(tracking_type: "secondary"), input_html: {class: 'form-select', id: 'dropdown-choice'}%>
