@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  contact: one
+  date_of_arrival: 2020-03-24
+  place_of_departure: MyString
+  mode_of_transport: MyString
+  transport_detail: MyString
+
+two:
+  contact: two
+  date_of_arrival: 2020-03-24
+  place_of_departure: MyString
+  mode_of_transport: MyString
+  transport_detail: MyString
