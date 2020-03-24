@@ -56,7 +56,7 @@ class Contact < ApplicationRecord
           contact.infectees.pluck(:name).join(', '),
         ]
 
-        if contact.tracking_type == "flight_passenger" and contact.flight_detail
+        if contact.passenger_type == "flight_passenger" and contact.flight_detail
           contact_rows = contact_rows + [
             contact.flight_detail.date_of_arrival,
             contact.flight_detail.flight_number,
