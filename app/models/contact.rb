@@ -1,7 +1,8 @@
 class Contact < ApplicationRecord
   enum gender: {male: "male", female: "female"}
   enum risk: {high: "high", medium: "medium", low: "low"}
-  enum tracking_type: {primary: "primary", secondary: "secondary", patient: "patient", flight_passenger: "flight_passenger"}
+  enum tracking_type: {primary: "primary", secondary: "secondary", patient: "patient"}
+  enum passenger_type: {flight_passenger: "flight_passenger", domestic_passenger: "domestic_passenger"}
   enum isolation_type: {home_isolation: "home_isolation", isolation_ward: "isolation_ward", admitted: "admitted"}
 
   has_many :infectees, class_name: 'Contact', foreign_key: 'infector_id'
