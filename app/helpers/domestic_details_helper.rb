@@ -1,0 +1,2 @@
+module DomesticDetailsHelper
+end
