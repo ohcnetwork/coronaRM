@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_24_051419) do
+ActiveRecord::Schema.define(version: 2020_03_24_065811) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,6 +67,8 @@ ActiveRecord::Schema.define(version: 2020_03_24_051419) do
     t.string "field_staff_phone"
     t.boolean "did_meet_suspected_patient"
     t.string "passenger_type"
+    t.string "profession"
+    t.boolean "is_health_worker"
     t.index ["district_id"], name: "index_contacts_on_district_id"
     t.index ["infector_id"], name: "index_contacts_on_infector_id"
   end
@@ -75,6 +77,17 @@ ActiveRecord::Schema.define(version: 2020_03_24_051419) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "domestic_details", force: :cascade do |t|
+    t.bigint "contact_id", null: false
+    t.date "date_of_arrival"
+    t.string "place_of_departure"
+    t.string "mode_of_transport"
+    t.string "transport_detail"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["contact_id"], name: "index_domestic_details_on_contact_id"
   end
 
   create_table "flight_details", force: :cascade do |t|
@@ -144,6 +157,7 @@ ActiveRecord::Schema.define(version: 2020_03_24_051419) do
   add_foreign_key "calls", "contacts"
   add_foreign_key "calls", "users"
   add_foreign_key "contacts", "districts"
+  add_foreign_key "domestic_details", "contacts"
   add_foreign_key "flight_details", "contacts"
   add_foreign_key "medical_reqs", "contacts"
   add_foreign_key "non_medical_reqs", "contacts"
