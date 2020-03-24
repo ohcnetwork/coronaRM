@@ -14,14 +14,14 @@
 </head>
 
 <body class="bg-gray-100 leading-normal tracking-normal font-sans text-gray-900">
-    <header class="px-8 lg:px-16 py-4 flex justify-between items-center w-full shadow-md bg-white">
+    <header class="px-8 lg:px-16 py-4 flex flex-col items-start lg:flex-row justify-between lg:items-center w-full shadow-md bg-white">
         <%= link_to root_path do %>
         <h4 class="font-bold">Corona RM</h4>
         <% end %>
 
-        <div class="flex items-center text-sm items-center">
+        <div class="flex flex-col lg:flex-row items-center text-sm items-center">
             <div>
-                <div class="flex rounded-md shadow-sm">
+                <div class="mt-2 lg:mt-0 flex rounded-md shadow-sm">
                     <div class="relative flex-grow focus-within:z-10">
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                             <svg class="h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
@@ -35,7 +35,7 @@
                     </button>
                 </div>
             </div>
-            <div class="ml-2">
+            <div class="mt-4 lg:mt-0 lg:ml-2">
                 <% if current_user.try(:admin?) %>
                 <%= link_to 'Create new User', new_user_registration_path, class: 'inline-flex items-center px-3 py-2 rounded-md text-sm font-medium leading-5 bg-indigo-100 text-indigo-800' %>
                 <%= link_to 'Dashboard', dashboard_index_path, class: 'inline-flex items-center px-3 py-2 rounded-md text-sm font-medium leading-5 text-indigo-800' %>
