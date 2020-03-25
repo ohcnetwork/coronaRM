@@ -5,6 +5,8 @@ class Contact < ApplicationRecord
   enum passenger_type: {flight_passenger: "flight_passenger", domestic_passenger: "domestic_passenger"}
   enum isolation_type: {home_isolation: "home_isolation", isolation_ward: "isolation_ward", admitted: "admitted"}
 
+  attr_accessor :name_and_id
+
   has_many :infectees, class_name: 'Contact', foreign_key: 'infector_id'
   belongs_to :infector, class_name: 'Contact', optional: true
 
@@ -19,6 +21,11 @@ class Contact < ApplicationRecord
   belongs_to :district
   has_one :flight_detail
   has_one :domestic_detail
+
+
+  def name_and_id
+    "ID: #{id}, #{name}"
+  end
 
   def self.to_csv
     attributes = %w{id patient_id name tracking_type passenger_type isolation_type risk did_meet_suspected_patient non_medical_reqs non_medical_other medical_reqs medical_other previous_medical_conditions symptoms feedback_comment profession is_health_worker phone age gender house_name ward panchayath town district phc_name date_of_first_contact mode_of_contact infector infectees date_of_arrival flight_number arrival_airport departure_country is_notified_country connecting_flight_details mode_of_transport domestic_date_of_arrival place_of_departure transport_detail}

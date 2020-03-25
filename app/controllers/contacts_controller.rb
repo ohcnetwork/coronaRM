@@ -25,6 +25,7 @@ class ContactsController < ApplicationController
   # GET /contacts/new
   def new
     @contact = Contact.new
+    @infector_suspects = Contact.where(tracking_type: ["primary", "patient"]).order(name: :asc)
   end
 
   # GET /contacts/1/edit
