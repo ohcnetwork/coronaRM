@@ -12,7 +12,7 @@ class DashboardController < ApplicationController
     @number_of_passengers_contacted_today = Contact.joins(:calls).where.not(passenger_type: [nil, ""]).where(calls:{created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day}).distinct.count
     @number_of_primary_contacted_today = Contact.joins(:calls).where(tracking_type: :primary,calls:{created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day}).distinct.count
     @number_of_secondary_contacted_today = Contact.joins(:calls).where(tracking_type: :secondary, calls:{created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day}).distinct.count
-    @number_of_health_workers_passengers = Contact.left_outer_joins(:flight_detail).where.not(passenger_type: [nil, ""]).where(flight_details: {is_health_worker: true}).distinct.count
+    @number_of_health_workers_passengers = Contact.where(is_health_worker: true).distinct.count
 
 
     today = Time.zone.now.beginning_of_day..Time.zone.now.end_of_day
@@ -72,7 +72,7 @@ class DashboardController < ApplicationController
   end
 
   def health_care_workers
-    contacts = Contact.left_outer_joins(:flight_detail).where.not(passenger_type: [nil, ""]).where(flight_details: {is_health_worker: true}).distinct
+    contacts = Contact.where(is_health_worker: true).distinct
 
     respond_to do |format|
       format.html
@@ -82,7 +82,7 @@ class DashboardController < ApplicationController
 
   def health_care_workers_today
     today = Time.zone.now.beginning_of_day..Time.zone.now.end_of_day
-    contacts = Contact.joins(:calls).where(calls: {created_at: today}).left_outer_joins(:flight_detail).where.not(passenger_type: [nil, ""]).where(flight_details: {is_health_worker: true}).distinct
+    contacts = Contact.joins(:calls).where(calls: {created_at: today}).where(is_health_worker: true).distinct
 
     respond_to do |format|
       format.html
