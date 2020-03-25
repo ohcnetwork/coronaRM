@@ -10,17 +10,17 @@ class Contact < ApplicationRecord
   has_many :infectees, class_name: 'Contact', foreign_key: 'infector_id'
   belongs_to :infector, class_name: 'Contact', optional: true
 
-  has_many :non_medical_reqs
-  has_many :medical_reqs
-  has_many :previous_medical_conditions
-  has_many :symptoms
+  has_many :non_medical_reqs, dependent: :delete_all
+  has_many :medical_reqs, dependent: :delete_all
+  has_many :previous_medical_conditions, dependent: :delete_all
+  has_many :symptoms, dependent: :delete_all
 
-  has_many :calls
+  has_many :calls, dependent: :delete_all
   has_many :callees, through: :calls, source: :user
 
-  belongs_to :district
-  has_one :flight_detail
-  has_one :domestic_detail
+  belongs_to :district, dependent: :destroy
+  has_one :flight_detail, dependent: :destory
+  has_one :domestic_detail, dependent: :destory
 
 
   def name_and_id
