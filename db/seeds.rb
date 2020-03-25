@@ -21,7 +21,7 @@ end
 # Check if Date is Valid
 def valid_date_or_empty_string(date, format)
   date = DateTime.strptime(date,format)
-  date
+  date = date.change(:year => Time.now.year)
 rescue ArgumentError
   nil
 end
@@ -48,24 +48,24 @@ end
 
 
 def populate_traveller_from_data_file
-  CSV.foreach(Rails.root.join('data/import_4.csv'), headers: true) do |row|
+  CSV.foreach(Rails.root.join('data/initial_5.csv'), headers: true) do |row|
     contact = Contact.create({
                      name: row[0],
-                     age: row[2],
-                     gender: row[3] ? (row[3].first.downcase == 'm' ? :male : :female) : nil,
-                     phone: row[4],
-                     house_name: row[5],
-                     ward: row[6],
-                     panchayath: row[7],
-                     profession: row[10],
+                     age: row[1],
+                     gender: row[2] ? (row[2].first.downcase == 'm' ? :male : :female) : nil,
+                     phone: row[3],
+                     house_name: row[4],
+                     ward: row[5],
+                     panchayath: row[6],
+                     profession: row[7],
                      isolation_type: "home_isolation",
                      passenger_type: "domestic_passenger",
                      district_id: District.find_by(name: "Pathanamthitta").id
                    })
     domestic = contact.build_domestic_detail({
-                                             date_of_arrival: valid_date_or_empty_string(row[1] ? row[1] : "", "%d/%m/%Y") || valid_date_or_empty_string(row[1] ? row[1] : "", "%d.%m.%Y"),
-                                             place_of_departure: row[8],
-                                             mode_of_transport: row[9] ? (row[9].first.downcase == 't' ? :train : "") : nil,
+                                             date_of_arrival: valid_date_or_empty_string(row[8] ? row[8] : "", "%d/%m/%Y") || valid_date_or_empty_string(row[8] ? row[8] : "", "%d.%m.%Y"),
+                                             place_of_departure: row[9],
+                                             mode_of_transport: row[10] ? (row[10].first.downcase == 't' ? :train : row[10].first.downcase == 'f' ? :domestic_flight : nil) : nil,
                                          })
     domestic.save!
   end
