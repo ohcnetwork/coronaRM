@@ -116,6 +116,15 @@ class DashboardController < ApplicationController
     end
   end
 
+  def generate_medical_reqs_today
+    today = Time.zone.now.beginning_of_day..Time.zone.now.end_of_day
+    contacts = Contact.joins(:medical_reqs).where(medical_reqs: {fullfilled: nil, created_at: today}).distinct
+    respond_to do |format|
+      format.html
+      format.csv { send_data contacts.to_csv, filename: "users-#{Date.today}.csv" }
+    end
+  end
+
   def generate_medical_reqs
     contacts = Contact.joins(:medical_reqs).where(medical_reqs: {fullfilled: nil}).distinct
     respond_to do |format|
@@ -124,8 +133,9 @@ class DashboardController < ApplicationController
     end
   end
 
-  def generate_non_medical_reqs
-    contacts = Contact.joins(:non_medical_reqs).where(non_medical_reqs: {fullfilled: nil}).distinct
+  def generate_non_medical_reqs_today
+    today = Time.zone.now.beginning_of_day..Time.zone.now.end_of_day
+    contacts = Contact.joins(:non_medical_reqs).where(non_medical_reqs: {fullfilled: nil, created_at: today}).distinct
     respond_to do |format|
       format.html
       format.csv { send_data contacts.to_csv, filename: "users-#{Date.today}.csv" }

@@ -17,7 +17,9 @@ Rails.application.routes.draw do
     get :generate_symptomatic, on: :collection
     get :generate_symptomatic_today, on: :collection
     get :generate_medical_reqs, on: :collection
+    get :generate_medical_reqs_today, on: :collection
     get :generate_non_medical_reqs, on: :collection
+    get :generate_non_medical_reqs_today, on: :collection
     get :generate_not_called_yet, on: :collection
   end
 
