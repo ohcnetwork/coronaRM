@@ -21,7 +21,7 @@ class Contact < ApplicationRecord
   has_one :domestic_detail
 
   def self.to_csv
-    attributes = %w{id patient_id name tracking_type passenger_type isolation_type risk did_meet_suspected_patient non_medical_reqs non_medical_other medical_reqs medical_other previous_medical_conditions symptoms feedback_comment profession is_health_worker phone age gender house_name ward panchayath town district phc_name date_of_first_contact mode_of_contact infector infectees date_of_arrival flight_number arrival_airport departure_country is_notified_country connecting_flight_details domestic_date_of_arrival place_of_departure mode_of_transport transport_detail}
+    attributes = %w{id patient_id name tracking_type passenger_type isolation_type risk did_meet_suspected_patient non_medical_reqs non_medical_other medical_reqs medical_other previous_medical_conditions symptoms feedback_comment profession is_health_worker phone age gender house_name ward panchayath town district phc_name date_of_first_contact mode_of_contact infector infectees date_of_arrival flight_number arrival_airport departure_country is_notified_country connecting_flight_details mode_of_transport domestic_date_of_arrival place_of_departure transport_detail}
 
     CSV.generate(headers: true) do |csv|
        csv << attributes
@@ -69,12 +69,21 @@ class Contact < ApplicationRecord
             contact.flight_detail.is_notified_country,
             contact.flight_detail.connecting_flight_details
           ]
+        else
+          contact_rows = contact_rows + [
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ]
         end
         if contact.passenger_type == "domestic_passenger" and contact.domestic_detail
           contact_rows = contact_rows + [
+            contact.domestic_detail.mode_of_transport,
             contact.domestic_detail.date_of_arrival,
             contact.domestic_detail.place_of_departure,
-            contact.domestic_detail.mode_of_transport,
             contact.domestic_detail.transport_detail,
           ]
         end
