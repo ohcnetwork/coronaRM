@@ -48,7 +48,7 @@ end
 
 
 def populate_traveller_from_data_file
-  CSV.foreach(Rails.root.join('data/initial_5.csv'), headers: true) do |row|
+  CSV.foreach(Rails.root.join('data/initial_6.csv'), headers: true) do |row|
     contact = Contact.create({
                      name: row[0],
                      age: row[1],
@@ -57,15 +57,14 @@ def populate_traveller_from_data_file
                      house_name: row[4],
                      ward: row[5],
                      panchayath: row[6],
-                     profession: row[7],
                      isolation_type: "home_isolation",
                      passenger_type: "domestic_passenger",
                      district_id: District.find_by(name: "Pathanamthitta").id
                    })
     domestic = contact.build_domestic_detail({
-                                             date_of_arrival: valid_date_or_empty_string(row[8] ? row[8] : "", "%d/%m/%Y") || valid_date_or_empty_string(row[8] ? row[8] : "", "%d.%m.%Y"),
-                                             place_of_departure: row[9],
-                                             mode_of_transport: row[10] ? (row[10].first.downcase == 't' ? :train : row[10].first.downcase == 'f' ? :domestic_flight : nil) : nil,
+                                             date_of_arrival: valid_date_or_empty_string(row[7] ? row[7] : "", "%d/%m/%Y") || valid_date_or_empty_string(row[7] ? row[7] : "", "%d.%m.%Y"),
+                                             place_of_departure: row[8],
+                                             mode_of_transport: row[9] ? (row[9].first.downcase == 't' ? :train : row[9].first.downcase == 'f' ? :domestic_flight : nil) : nil,
                                          })
     domestic.save!
   end
