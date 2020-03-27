@@ -1,8 +1,8 @@
 <div class="mt-4 flex items-center justify-between">
     <% if @current_user.try(:admin?) %>
-        <h1 class="text-2xl font-bold">Tracked Contacts</h1>
+    <h1 class="text-2xl font-bold">Tracked Contacts</h1>
     <% else %>
-        <h1 class="text-2xl font-bold">Contacts Called Today</h1>
+    <h1 class="text-2xl font-bold">Contacts Called Today</h1>
     <% end %>
     <span class="inline-flex rounded-md shadow-sm">
         <%= link_to '+ New Contact', new_contact_path ,class: 'inline-flex items-center px-3 py-2 border border-gray-300 text-sm leading-4 font-medium rounded-md text-gray-100 bg-gray-900 hover:text-gray-200 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:text-gray-100 active:bg-gray-700 transition ease-in-out duration-150' %>
@@ -19,6 +19,9 @@
                                 Name
                             </th>
                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-600 uppercase tracking-wider">
+                                Patient ID
+                            </th>
+                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-600 uppercase tracking-wider">
                                 Phone
                             </th>
                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-center text-xs leading-4 font-medium text-gray-600 uppercase tracking-wider">
@@ -31,9 +34,6 @@
                                 Risk
                             </th>
                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-600 uppercase tracking-wider">
-                                Since Contact
-                            </th>
-                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-600 uppercase tracking-wider">
                                 Last Called
                             </th>
                         </tr>
@@ -43,55 +43,51 @@
                         <tr class="bg-white">
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 font-medium text-gray-900">
                                 <%= link_to contact do %>
-                                    <div class="text-sm truncate leading-5 text-gray-900"><%= contact.name.try(:titleize) %></div>
-                                    <div class="text-sm leading-5 text-gray-600"><%= contact.patient_id %></div>
+                                <div class="text-sm truncate leading-5 text-gray-900"><%= contact.name.try(:titleize) %></div>
+                                <div class="text-sm leading-5 text-gray-600"><%= contact.patient_id %></div>
                                 <% end %>
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-right">
                                 <%= link_to contact do %>
-                                    <%= contact.phone %>
+                                    <%= contact.id %>
+                                <% end %>
+                            </td>
+                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-right">
+                                <%= link_to contact do %>
+                                <%= contact.phone %>
                                 <% end %>
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-center text-sm leading-5 font-medium">
                                 <%= link_to contact do %>
-                                    <% if contact.try(:flight_passenger?) %>
-                                        <%= content_tag :span, 'Flight Passenger' ,class: "px-2 inline-flex text-xs leading-5 font-semibold rounded-full text-gray-600 #{contact.tracking_type.to_s == "primary" ? 'bg-red-100 text-red-800' : 'bg-gray-200'}" %>
-                                    <% else %>
-                                        <%= content_tag :span, contact.tracking_type.to_s.capitalize,class: "px-2 inline-flex text-xs leading-5 font-semibold rounded-full text-gray-600 #{contact.tracking_type.to_s == "primary" ? 'bg-red-100 text-red-800' : 'bg-gray-200'}" %>
-                                    <% end %>
+                                <% if contact.try(:flight_passenger?) %>
+                                <%= content_tag :span, 'Flight Passenger' ,class: "px-2 inline-flex text-xs leading-5 font-semibold rounded-full text-gray-600 #{contact.tracking_type.to_s == "primary" ? 'bg-red-100 text-red-800' : 'bg-gray-200'}" %>
+                                <% else %>
+                                <%= content_tag :span, contact.tracking_type.to_s.capitalize,class: "px-2 inline-flex text-xs leading-5 font-semibold rounded-full text-gray-600 #{contact.tracking_type.to_s == "primary" ? 'bg-red-100 text-red-800' : 'bg-gray-200'}" %>
+                                <% end %>
                                 <% end %>
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-600">
                                 <%= link_to contact do %>
-                                    <%= contact.gender.to_s.capitalize() %>, <%= contact.age %> y/o
+                                <%= contact.gender.to_s.capitalize() %>, <%= contact.age %> y/o
                                 <% end %>
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-center text-sm leading-5 font-medium">
                                 <%= link_to contact do %>
-                                    <%= content_tag :span, contact.risk.to_s.capitalize ,class: "px-2 inline-flex text-xs leading-5 font-semibold rounded-full text-gray-600 #{contact.risk.to_s == "high" ? 'bg-red-100 text-red-800' : 'bg-gray-200'}" %>
-                                <% end %>
-                            </td>
-                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-600">
-                                <%= link_to contact do %>
-                                    <% if contact.date_of_first_contact %>
-                                        <%= time_ago_in_words(contact.date_of_first_contact) %>
-                                    <% else %>
-                                        Unknown
-                                    <% end %>
+                                <%= content_tag :span, contact.risk.to_s.capitalize ,class: "px-2 inline-flex text-xs leading-5 font-semibold rounded-full text-gray-600 #{contact.risk.to_s == "high" ? 'bg-red-100 text-red-800' : 'bg-gray-200'}" %>
                                 <% end %>
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-xs font-medium leading-5 text-gray-600">
                                 <%= link_to contact do %>
-                                    <% last_call = contact.calls.order("created_at").last %>
-                                        <% if last_call %>
-                                            <% if last_call.not_reachable %>
-                                                Not Reachable <span class="font-bold"><%= time_ago_in_words(last_call.created_at) %></span> ago
-                                            <% else %>
-                                                Called <span class="font-bold"><%= time_ago_in_words(last_call.created_at) %></span> ago
-                                            <% end %>
-                                        <% else %>
-                                            Not called yet
-                                        <% end %>
+                                <% last_call = contact.calls.order("created_at").last %>
+                                <% if last_call %>
+                                <% if last_call.not_reachable %>
+                                Not Reachable <span class="font-bold"><%= time_ago_in_words(last_call.created_at) %></span> ago
+                                <% else %>
+                                Called <span class="font-bold"><%= time_ago_in_words(last_call.created_at) %></span> ago
+                                <% end %>
+                                <% else %>
+                                Not called yet
+                                <% end %>
                                 <% end %>
                             </td>
                         </tr>
