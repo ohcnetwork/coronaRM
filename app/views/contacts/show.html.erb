@@ -54,29 +54,25 @@
                 </dt>
                 <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
                     <% if @contact.try(:flight_passenger?) && @contact.flight_detail.try(:date_of_arrival) %>
-                    <% @day_to_exit_from_quarantine = @contact.flight_detail.date_of_arrival + (@contact.flight_detail.is_notified_country ? 28.days : 14.days) %>
-                    <% if @day_to_exit_from_quarantine > Date.today %>
-                    <%= distance_of_time_in_words(Time.now, @day_to_exit_from_quarantine)%>, on <span class="font-bold"><%= @day_to_exit_from_quarantine.to_s(:long) %></span>
+                        <% @day_to_exit_from_quarantine = @contact.flight_detail.date_of_arrival + (@contact.flight_detail.is_notified_country ? 28.days : 14.days) %>
+                    <% elsif @contact.try(:domestic_passenger?) && @contact.domestic_detail.try(:date_of_arrival)%>
+                        <% @day_to_exit_from_quarantine = @contact.domestic_detail.date_of_arrival + 28.days %>
+                    <% elsif @contact.date_of_first_contact.present? %>
+                            <% @day_to_exit_from_quarantine = @contact.date_of_first_contact + 28.days %>
                     <% else %>
-                    <p class="font-bold">
-                        Out of Quarantine
-                    </p>
+                        <% @day_to_exit_from_quarantine = nil %>
+                    <% end %>
 
-                    <% end %>
+                    <% if @day_to_exit_from_quarantine.present? %>
+                        <% if @day_to_exit_from_quarantine > Date.today %>
+                            <%= distance_of_time_in_words(Time.now, @day_to_exit_from_quarantine)%>, on <span class="font-bold"><%= @day_to_exit_from_quarantine.to_s(:long) %></span>
+                        <% else %>
+                            <p class="font-bold">
+                                Out of Quarantine
+                            </p>
+                        <% end %>
                     <% else %>
-                    <% if @contact.date_of_first_contact %>
-                    <% @day_to_exit_from_quarantine_primary = @contact.date_of_first_contact + 28.days %>
-                    <% if @day_to_exit_from_quarantine_primary > Date.today %>
-                    <%= distance_of_time_in_words(Time.now, @day_to_exit_from_quarantine_primary) %>
-                    <% else %>
-                    <p class="font-bold">
-                        Out of Quarantine
-                    </p>
-
-                    <% end %>
-                    <% else %>
-                    Unknown
-                    <% end %>
+                        Date of Contact is not Known
                     <% end %>
                 </dd>
             </div>
