@@ -41,7 +41,7 @@ class DashboardController < ApplicationController
     @contacted_today = Contact.joins(:calls).where(calls:{created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day}).distinct
     respond_to do |format|
       format.html
-      format.csv { send_data @contacted_today.to_csv, filename: "users-#{Date.today}.csv" }
+      format.csv { send_data @contacted_today.to_minimal_csv, filename: "users-#{Date.today}.csv" }
     end
   end
 
@@ -49,7 +49,7 @@ class DashboardController < ApplicationController
     @contacted_today = Contact.joins(:calls).where(calls:{created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day, not_reachable: true}).distinct
     respond_to do |format|
       format.html
-      format.csv { send_data @contacted_today.to_csv, filename: "users-#{Date.today}.csv" }
+      format.csv { send_data @contacted_today.to_minimal_csv, filename: "users-#{Date.today}.csv" }
     end
   end
 
@@ -76,7 +76,7 @@ class DashboardController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.csv { send_data contacts.to_csv, filename: "users-#{Date.today}.csv" }
+      format.csv { send_data contacts.to_minimal_csv, filename: "users-#{Date.today}.csv" }
     end
   end
 
@@ -154,7 +154,7 @@ class DashboardController < ApplicationController
     contacts = Contact.left_outer_joins(:calls).where(calls: {id: nil})
     respond_to do |format|
       format.html
-      format.csv { send_data contacts.to_csv, filename: "users-#{Date.today}.csv" }
+      format.csv { send_data contacts.to_minimal_csv, filename: "users-#{Date.today}.csv" }
     end
   end
 

@@ -27,6 +27,32 @@ class Contact < ApplicationRecord
     "ID: #{id}, #{name}"
   end
 
+  def self.to_minimal_csv
+    attributes = %w{id name phone tracking_type passenger_type isolation_type profession is_health_worker house_name ward panchayath}
+
+    CSV.generate(headers: true) do |csv|
+       csv << attributes
+
+      all.each do |contact|
+        contact_rows = [
+          contact.id,
+          contact.name,
+          contact.phone,
+          contact.tracking_type,
+          contact.passenger_type,
+          contact.isolation_type,
+          contact.profession,
+          contact.is_health_worker,
+          contact.house_name,
+          contact.ward,
+          contact.panchayath
+        ]
+
+        csv << contact_rows
+      end
+    end
+  end
+
   def self.to_csv
     attributes = %w{id patient_id name tracking_type passenger_type isolation_type risk did_meet_suspected_patient non_medical_reqs non_medical_other medical_reqs medical_other previous_medical_conditions symptoms feedback_comment profession is_health_worker phone age gender house_name ward panchayath town district phc_name date_of_first_contact mode_of_contact infector infectees date_of_arrival flight_number arrival_airport departure_country is_notified_country connecting_flight_details mode_of_transport domestic_date_of_arrival place_of_departure transport_detail}
 
