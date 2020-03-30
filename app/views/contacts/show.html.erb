@@ -56,7 +56,7 @@
                     <% if @contact.try(:flight_passenger?) && @contact.flight_detail.try(:date_of_arrival) %>
                         <% @day_to_exit_from_quarantine = @contact.flight_detail.date_of_arrival + (@contact.flight_detail.is_notified_country ? 28.days : 14.days) %>
                     <% elsif @contact.try(:domestic_passenger?) && @contact.domestic_detail.try(:date_of_arrival)%>
-                        <% @day_to_exit_from_quarantine = @contact.domestic_detail.date_of_arrival + 14.days %>
+                        <% @day_to_exit_from_quarantine = @contact.domestic_detail.date_of_arrival + (@contact.is_health_worker ?  28.days : 14.days) %>
                     <% elsif @contact.date_of_first_contact.present? %>
                             <% @day_to_exit_from_quarantine = @contact.date_of_first_contact + 28.days %>
                     <% else %>
