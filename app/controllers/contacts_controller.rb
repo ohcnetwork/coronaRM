@@ -30,6 +30,7 @@ class ContactsController < ApplicationController
 
   # GET /contacts/1/edit
   def edit
+    @infector_suspects = Contact.where(tracking_type: ["primary", "patient"]).order(name: :asc)
   end
 
   # POST /contacts

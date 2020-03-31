@@ -14,7 +14,7 @@
         <%= f.input :tracking_type, input_html: {class: 'form-select'}%>
         <%= f.input :passenger_type, input_html: {class: 'form-select'}%>
         <%= f.input :isolation_type, input_html: {class: 'form-select'}%>
-        <%= f.association :infector,:label_method => lambda {|c| "ID: #{c.id} | #{c.name}"}, collection: @infector_suspects, input_html: {class: 'form-select', id: 'dropdown-choice-select'}%>
+        <%= f.association :infector,:label_method => lambda {|c| "ID: #{c.try(:id)} | #{c.try(:name)}"}, collection: @infector_suspects, input_html: {class: 'form-select', id: 'dropdown-choice-select'}%>
 
         <%= f.input :date_of_first_contact, as: :date, input_html: {class: 'form-select p-2 border'} %>
     </div>
