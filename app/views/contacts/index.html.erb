@@ -19,7 +19,7 @@
                                 Name
                             </th>
                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-600 uppercase tracking-wider">
-                                Patient ID
+                                DB ID
                             </th>
                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-600 uppercase tracking-wider">
                                 Phone
@@ -59,11 +59,12 @@
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-center text-sm leading-5 font-medium">
                                 <%= link_to contact do %>
-                                <% if contact.try(:flight_passenger?) %>
-                                <%= content_tag :span, 'Flight Passenger' ,class: "px-2 inline-flex text-xs leading-5 font-semibold rounded-full text-gray-600 #{contact.tracking_type.to_s == "primary" ? 'bg-red-100 text-red-800' : 'bg-gray-200'}" %>
-                                <% else %>
-                                <%= content_tag :span, contact.tracking_type.to_s.capitalize,class: "px-2 inline-flex text-xs leading-5 font-semibold rounded-full text-gray-600 #{contact.tracking_type.to_s == "primary" ? 'bg-red-100 text-red-800' : 'bg-gray-200'}" %>
-                                <% end %>
+                                    <% if contact.tracking_type.present? %>
+                                        <%= content_tag :span, contact.tracking_type.to_s.capitalize + ' Contact' ,class: "px-2 inline-flex text-xs leading-5 font-semibold rounded-full text-gray-600 #{["patient", "primary"].include?(contact.tracking_type.to_s) ? 'bg-red-100 text-red-800' : 'bg-gray-200'}" %>
+                                    <% end %>
+                                    <% if contact.passenger_type.present? %>
+                                        <%= content_tag :span, contact.passenger_type.to_s.split("_").join(" ").titleize ,class: "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold leading-4 bg-yellow-100 text-yellow-800" %>
+                                    <% end %>
                                 <% end %>
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-600">
