@@ -15,6 +15,8 @@
         <%= f.input :passenger_type, input_html: {class: 'form-select'}%>
         <%= f.input :isolation_type, input_html: {class: 'form-select'}%>
         <%= f.association :infector,collection: @infector_suspects, input_html: {class: 'form-select', id: 'dropdown-choice-select'}%>
+
+        <%= f.input :date_of_first_contact, as: :date, input_html: {class: 'form-select p-2 border'} %>
     </div>
 
     <div>
