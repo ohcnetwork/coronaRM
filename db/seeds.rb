@@ -70,4 +70,4 @@ def populate_traveller_from_data_file
   end
 end
 
-populate_traveller_from_data_file()
+create_districts()
